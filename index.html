@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hurricane Surf Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([30.0, -85.0], 5); // Centered on Gulf Coast
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Example surf spot markers
+    var spots = [
+      {
+        name: "Fort Myers Beach",
+        coords: [26.452, -81.948],
+        hurricane: "Ian (2022)",
+        height: "8 ft"
+      },
+      {
+        name: "Cocoa Beach",
+        coords: [28.320, -80.608],
+        hurricane: "Dorian (2019)",
+        height: "6 ft"
+      },
+      {
+        name: "Outer Banks",
+        coords: [35.558, -75.466],
+        hurricane: "Isabel (2003)",
+        height: "10 ft"
+      }
+    ];
+
+    // Add markers with popups
+    spots.forEach(function(spot) {
+      L.marker(spot.coords).addTo(map)
+        .bindPopup(`<strong>${spot.name}</strong><br>Hurricane: ${spot.hurricane}<br>Surf Height: ${spot.height}`);
+    });
+  </script>
+</body>
+</html>
