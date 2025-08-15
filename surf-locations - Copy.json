@@ -1,0 +1,119 @@
+[
+  {
+    "location": "Ventura Beach, CA",
+    "lat": 34.275,
+    "lng": -119.294,
+    "hurricane": "Hilary",
+    "year": 2023,
+    "surf": "10–15 ft",
+    "notes": "Flooding and injuries from rogue waves"
+  },
+  {
+    "location": "South County, RI",
+    "lat": 41.450,
+    "lng": -71.650,
+    "hurricane": "Fiona",
+    "year": 2022,
+    "surf": "10 ft",
+    "notes": "Waves damaged infrastructure and closed beaches"
+  },
+  {
+    "location": "Florida Panhandle",
+    "lat": 30.150,
+    "lng": -85.650,
+    "hurricane": "Michael",
+    "year": 2018,
+    "surf": "20+ ft surge",
+    "notes": "Category 5 storm; extreme coastal flooding"
+  },
+  {
+    "location": "Long Island, NY",
+    "lat": 40.789,
+    "lng": -73.135,
+    "hurricane": "Lee",
+    "year": 2025,
+    "surf": "6–10 ft",
+    "notes": "Rip currents and beach closures"
+  },
+  {
+    "location": "New Jersey Shore",
+    "lat": 39.650,
+    "lng": -74.170,
+    "hurricane": "Larry",
+    "year": 2025,
+    "surf": "8–12 ft",
+    "notes": "Surfing conditions and coastal erosion"
+  },
+  {
+    "location": "Myrtle Beach, SC",
+    "lat": 33.689,
+    "lng": -78.886,
+    "hurricane": "Ian",
+    "year": 2022,
+    "surf": "6–10 ft",
+    "notes": "Waves breached sea walls and flooded streets"
+  },
+  {
+    "location": "Seacoast, NH",
+    "lat": 43.071,
+    "lng": -70.762,
+    "hurricane": "Teddy",
+    "year": 2020,
+    "surf": "8–10 ft",
+    "notes": "Surfers reported excellent conditions amid warnings"
+  },
+  {
+    "location": "St. Pete Beach, FL",
+    "lat": 27.725,
+    "lng": -82.741,
+    "hurricane": "Helene",
+    "year": 2024,
+    "surf": "~6 ft",
+    "notes": "Storm waves crashed on shore; beach erosion reported"
+  },
+  {
+    "location": "Galveston, TX",
+    "lat": 29.301,
+    "lng": -94.797,
+    "hurricane": "Harvey",
+    "year": 2017,
+    "surf": "12–18 ft",
+    "notes": "Massive flooding and storm surge"
+  },
+  {
+    "location": "Outer Banks, NC",
+    "lat": 35.558,
+    "lng": -75.466,
+    "hurricane": "Dorian",
+    "year": 2019,
+    "surf": "10–14 ft",
+    "notes": "Beach erosion and evacuations"
+  },
+  {
+    "location": "Cape Cod, MA",
+    "lat": 41.668,
+    "lng": -70.296,
+    "hurricane": "Henri",
+    "year": 2021,
+    "surf": "7–11 ft",
+    "notes": "Strong surf and coastal flooding"
+  },
+  {
+    "location": "Santa Cruz, CA",
+    "lat": 36.951,
+    "lng": -122.026,
+    "hurricane": "Kay",
+    "year": 2022,
+    "surf": "5–8 ft",
+    "notes": "Unusual Pacific swell; minor flooding"
+  },
+  {
+    "location": "Tybee Island, GA",
+    "lat": 32.000,
+    "lng": -80.850,
+    "hurricane": "Idalia",
+    "year": 2023,
+    "surf": "9–13 ft",
+    "notes": "Storm surge flooded low-lying areas"
+  }
+]
