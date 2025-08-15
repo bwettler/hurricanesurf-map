@@ -7,7 +7,7 @@
     "year": 2023,
     "surf": "10–15 ft",
     "notes": "Flooding and injuries from rogue waves",
-    "popupContent": "<b>Ventura Beach, CA</b><br>Hurricane Hilary (2023)<br>Surf: 10–15 ft<br><a href='https://www.surfline.com/surf-news/swell-alert/tracking-major-hurricane-hilary/185309' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.surfline.com/surf-news/swell-alert/tracking-major-hurricane-hilary/185309"
   },
   {
     "location": "South County, RI",
@@ -17,7 +17,7 @@
     "year": 2022,
     "surf": "10 ft",
     "notes": "Waves damaged infrastructure and closed beaches",
-    "popupContent": "<b>South County, RI</b><br>Hurricane Fiona (2022)<br>Surf: 10 ft<br><a href='https://www.abc6.com/effects-of-hurricane-fiona-sends-10-foot-waves-to-south-county/' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.abc6.com/effects-of-hurricane-fiona-sends-10-foot-waves-to-south-county/"
   },
   {
     "location": "Florida Panhandle",
@@ -27,7 +27,7 @@
     "year": 2018,
     "surf": "20+ ft surge",
     "notes": "Category 5 storm; extreme coastal flooding",
-    "popupContent": "<b>Florida Panhandle</b><br>Hurricane Michael (2018)<br>Surf: 20+ ft surge<br><a href='https://www.naplesnews.com/story/news/local/environment/2018/10/10/hurricane-michael-brings-high-waves-possible-beach-erosion-collier-florida/1589434002/' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.naplesnews.com/story/news/local/environment/2018/10/10/hurricane-michael-brings-high-waves-possible-beach-erosion-collier-florida/1589434002/"
   },
   {
     "location": "Long Island, NY",
@@ -37,7 +37,7 @@
     "year": 2025,
     "surf": "6–10 ft",
     "notes": "Rip currents and beach closures",
-    "popupContent": "<b>Long Island, NY</b><br>Hurricane Lee (2025)<br>Surf: 6–10 ft<br><a href='https://www.youtube.com/watch?v=nasrzUgqZQg' target='_blank'>View Surf Video</a>"
+    "link": "https://www.youtube.com/watch?v=nasrzUgqZQg"
   },
   {
     "location": "New Jersey Shore",
@@ -47,7 +47,7 @@
     "year": 2025,
     "surf": "8–12 ft",
     "notes": "Surfing conditions and coastal erosion",
-    "popupContent": "<b>New Jersey Shore</b><br>Hurricane Larry (2025)<br>Surf: 8–12 ft<br><a href='https://www.urnsurfco.com/hurricane-larry-new-jersey/' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.urnsurfco.com/hurricane-larry-new-jersey/"
   },
   {
     "location": "Myrtle Beach, SC",
@@ -57,7 +57,7 @@
     "year": 2022,
     "surf": "6–10 ft",
     "notes": "Waves breached sea walls and flooded streets",
-    "popupContent": "<b>Myrtle Beach, SC</b><br>Hurricane Ian (2022)<br>Surf: 6–10 ft<br><a href='https://www.live5news.com/2022/10/02/video-shows-hurricane-ian-slamming-myrtle-beach-state-park-pier-during-height-storm/' target='_blank'>View Surf Video</a>"
+    "link": "https://www.live5news.com/2022/10/02/video-shows-hurricane-ian-slamming-myrtle-beach-state-park-pier-during-height-storm/"
   },
   {
     "location": "Seacoast, NH",
@@ -67,7 +67,7 @@
     "year": 2020,
     "surf": "8–10 ft",
     "notes": "Surfers reported excellent conditions amid warnings",
-    "popupContent": "<b>Seacoast, NH</b><br>Hurricane Teddy (2020)<br>Surf: 8–10 ft<br><a href='https://www.seacoastonline.com/story/news/2020/09/23/surfers-delight-hurricane-teddy-brings-big-waves-to-seacoast/42683481/' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.seacoastonline.com/story/news/2020/09/23/surfers-delight-hurricane-teddy-brings-big-waves-to-seacoast/42683481/"
   },
   {
     "location": "St. Pete Beach, FL",
@@ -77,7 +77,7 @@
     "year": 2024,
     "surf": "~6 ft",
     "notes": "Storm waves crashed on shore; beach erosion reported",
-    "popupContent": "<b>St. Pete Beach, FL</b><br>Hurricane Helene (2024)<br>Surf: ~6 ft<br><a href='https://www.rnz.co.nz/news/world/529252/in-pictures-hurricane-helene-batters-florida' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.rnz.co.nz/news/world/529252/in-pictures-hurricane-helene-batters-florida"
   },
   {
     "location": "Galveston, TX",
@@ -87,7 +87,7 @@
     "year": 2017,
     "surf": "12–18 ft",
     "notes": "Massive flooding and storm surge",
-    "popupContent": "<b>Galveston, TX</b><br>Hurricane Harvey (2017)<br>Surf: 12–18 ft<br><a href='https://www.nbcnews.com/slideshow/news/photos-hurricane-harvey-slams-texas-n796226' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.nbcnews.com/slideshow/news/photos-hurricane-harvey-slams-texas-n796226"
   },
   {
     "location": "Outer Banks, NC",
@@ -97,7 +97,7 @@
     "year": 2019,
     "surf": "10–14 ft",
     "notes": "Beach erosion and evacuations",
-    "popupContent": "<b>Outer Banks, NC</b><br>Hurricane Dorian (2019)<br>Surf: 10–14 ft<br><a href='https://www.wral.com/hurricane-dorian-brings-heavy-rain-strong-winds-to-nc-coast/18616569/' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.wral.com/hurricane-dorian-brings-heavy-rain-strong-winds-to-nc-coast/18616569/"
   },
   {
     "location": "Cape Cod, MA",
@@ -107,7 +107,7 @@
     "year": 2021,
     "surf": "7–11 ft",
     "notes": "Strong surf and coastal flooding",
-    "popupContent": "<b>Cape Cod, MA</b><br>Hurricane Henri (2021)<br>Surf: 7–11 ft<br><a href='https://www.capecodtimes.com/story/news/2021/08/22/hurricane-henri-brings-heavy-rain-strong-winds-coastal-flooding-cape-cod/8238828002/' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.capecodtimes.com/story/news/2021/08/22/hurricane-henri-brings-heavy-rain-strong-winds-coastal-flooding-cape-cod/8238828002/"
   },
   {
     "location": "Santa Cruz, CA",
@@ -117,7 +117,7 @@
     "year": 2022,
     "surf": "5–8 ft",
     "notes": "Unusual Pacific swell; minor flooding",
-    "popupContent": "<b>Santa Cruz, CA</b><br>Hurricane Kay (2022)<br>Surf: 5–8 ft<br><a href='https://www.surfline.com/surf-news/hurricane-kay-brings-rare-south-swell-to-california/157839' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.surfline.com/surf-news/hurricane-kay-brings-rare-south-swell-to-california/157839"
   },
   {
     "location": "Tybee Island, GA",
@@ -127,6 +127,6 @@
     "year": 2023,
     "surf": "9–13 ft",
     "notes": "Storm surge flooded low-lying areas",
-    "popupContent": "<b>Tybee Island, GA</b><br>Hurricane Idalia (2023)<br>Surf: 9–13 ft<br><a href='https://www.savannahnow.com/story/news/2023/08/30/hurricane-idalia-tybee-island-georgia-storm-surge-flooding/70752694007/' target='_blank'>View Surf Photo</a>"
+    "link": "https://www.savannahnow.com/story/news/2023/08/30/hurricane-idalia-tybee-island-georgia-storm-surge-flooding/70752694007/"
   }
 ]
