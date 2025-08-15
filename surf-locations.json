@@ -1,47 +1,74 @@
 [
   {
-    "location": "Sebastian Inlet, FL",
-    "lat": 27.867,
-    "lng": -80.446,
-    "hurricane": "Dorian",
-    "year": 2019,
-    "surf": "8-10 ft",
-    "notes": "Clean conditions, long period swell"
+    "location": "Ventura Beach, CA",
+    "lat": 34.275,
+    "lng": -119.294,
+    "hurricane": "Hilary",
+    "year": 2023,
+    "surf": "10–15 ft",
+    "notes": "Flooding and injuries from rogue waves"
   },
   {
-    "location": "Cape Hatteras, NC",
-    "lat": 35.251,
-    "lng": -75.528,
-    "hurricane": "Isaias",
+    "location": "South County, RI",
+    "lat": 41.450,
+    "lng": -71.650,
+    "hurricane": "Fiona",
+    "year": 2022,
+    "surf": "10 ft",
+    "notes": "Waves damaged infrastructure and closed beaches"
+  },
+  {
+    "location": "Florida Panhandle",
+    "lat": 30.150,
+    "lng": -85.650,
+    "hurricane": "Michael",
+    "year": 2018,
+    "surf": "20+ ft surge",
+    "notes": "Category 5 storm; extreme coastal flooding"
+  },
+  {
+    "location": "Long Island, NY",
+    "lat": 40.789,
+    "lng": -73.135,
+    "hurricane": "Lee",
+    "year": 2025,
+    "surf": "6–10 ft",
+    "notes": "Rip currents and beach closures"
+  },
+  {
+    "location": "New Jersey Shore",
+    "lat": 39.650,
+    "lng": -74.170,
+    "hurricane": "Larry",
+    "year": 2025,
+    "surf": "8–12 ft",
+    "notes": "Surfing conditions and coastal erosion"
+  },
+  {
+    "location": "Myrtle Beach, SC",
+    "lat": 33.689,
+    "lng": -78.886,
+    "hurricane": "Ian",
+    "year": 2022,
+    "surf": "6–10 ft",
+    "notes": "Waves breached sea walls and flooded streets"
+  },
+  {
+    "location": "Seacoast, NH",
+    "lat": 43.071,
+    "lng": -70.762,
+    "hurricane": "Teddy",
     "year": 2020,
-    "surf": "6-8 ft",
-    "notes": "Windy but powerful sets"
+    "surf": "8–10 ft",
+    "notes": "Surfers reported excellent conditions amid warnings"
   },
   {
-    "location": "Rincon, PR",
-    "lat": 18.340,
-    "lng": -67.255,
-    "hurricane": "Maria",
-    "year": 2017,
-    "surf": "10-12 ft",
-    "notes": "Heavy swell, reef break"
-  },
-  {
-    "location": "Montauk, NY",
-    "lat": 41.035,
-    "lng": -71.954,
-    "hurricane": "Henri",
-    "year": 2021,
-    "surf": "5-7 ft",
-    "notes": "Short period, choppy"
-  },
-  {
-    "location": "Ocean City, MD",
-    "lat": 38.336,
-    "lng": -75.084,
-    "hurricane": "Fay",
-    "year": 2020,
-    "surf": "4-6 ft",
-    "notes": "Brief window, clean morning sets"
+    "location": "St. Pete Beach, FL",
+    "lat": 27.725,
+    "lng": -82.741,
+    "hurricane": "Helene",
+    "year": 2024,
+    "surf": "~6 ft",
+    "notes": "Storm waves crashed on shore; beach erosion reported"
   }
 ]
