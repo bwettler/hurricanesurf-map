@@ -1,0 +1,74 @@
+[
+  {
+    "location": "Ventura Beach, CA",
+    "lat": 34.275,
+    "lng": -119.294,
+    "hurricane": "Hilary",
+    "year": 2023,
+    "surf": "10–15 ft",
+    "notes": "Flooding and injuries from rogue waves"
+  },
+  {
+    "location": "South County, RI",
+    "lat": 41.45,
+    "lng": -71.5,
+    "hurricane": "Fiona",
+    "year": 2022,
+    "surf": "10 ft",
+    "notes": "Waves damaged infrastructure and closed beaches"
+  },
+  {
+    "location": "Florida Panhandle",
+    "lat": 30.3,
+    "lng": -86.5,
+    "hurricane": "Michael",
+    "year": 2018,
+    "surf": "20+ ft surge",
+    "notes": "Category 5 storm; extreme coastal flooding"
+  },
+  {
+    "location": "Long Island, NY",
+    "lat": 40.8,
+    "lng": -73.1,
+    "hurricane": "Lee",
+    "year": 2023,
+    "surf": "6–10 ft",
+    "notes": "Rip currents and beach closures"
+  },
+  {
+    "location": "New Jersey Shore",
+    "lat": 39.5,
+    "lng": -74.5,
+    "hurricane": "Larry",
+    "year": 2021,
+    "surf": "8–12 ft",
+    "notes": "Surfing conditions and coastal erosion"
+  },
+  {
+    "location": "Myrtle Beach, SC",
+    "lat": 33.7,
+    "lng": -78.9,
+    "hurricane": "Ian",
+    "year": 2022,
+    "surf": "6–10 ft",
+    "notes": "Waves breached sea walls and flooded streets"
+  },
+  {
+    "location": "Seacoast, NH",
+    "lat": 43.0,
+    "lng": -70.8,
+    "hurricane": "Teddy",
+    "year": 2020,
+    "surf": "8–10 ft",
+    "notes": "Surfers reported excellent conditions amid warnings"
+  },
+  {
+    "location": "St. Pete Beach, FL",
+    "lat": 27.7,
+    "lng": -82.7,
+    "hurricane": "Helene",
+    "year": 2024,
+    "surf": "~6 ft",
+    "notes": "Storm waves crashed on shore; beach erosion reported"
+  }
+]
