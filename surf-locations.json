@@ -70,5 +70,50 @@
     "year": 2024,
     "surf": "~6 ft",
     "notes": "Storm waves crashed on shore; beach erosion reported"
+  },
+  {
+    "location": "Galveston, TX",
+    "lat": 29.301,
+    "lng": -94.797,
+    "hurricane": "Harvey",
+    "year": 2017,
+    "surf": "12–18 ft",
+    "notes": "Massive flooding and storm surge"
+  },
+  {
+    "location": "Outer Banks, NC",
+    "lat": 35.558,
+    "lng": -75.466,
+    "hurricane": "Dorian",
+    "year": 2019,
+    "surf": "10–14 ft",
+    "notes": "Beach erosion and evacuations"
+  },
+  {
+    "location": "Cape Cod, MA",
+    "lat": 41.668,
+    "lng": -70.296,
+    "hurricane": "Henri",
+    "year": 2021,
+    "surf": "7–11 ft",
+    "notes": "Strong surf and coastal flooding"
+  },
+  {
+    "location": "Santa Cruz, CA",
+    "lat": 36.951,
+    "lng": -122.026,
+    "hurricane": "Kay",
+    "year": 2022,
+    "surf": "5–8 ft",
+    "notes": "Unusual Pacific swell; minor flooding"
+  },
+  {
+    "location": "Tybee Island, GA",
+    "lat": 32.000,
+    "lng": -80.850,
+    "hurricane": "Idalia",
+    "year": 2023,
+    "surf": "9–13 ft",
+    "notes": "Storm surge flooded low-lying areas"
   }
 ]
