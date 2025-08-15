@@ -31,14 +31,12 @@
           const popupContent = `
             <strong>${loc.location}</strong><br>
             Hurricane: ${loc.hurricane} (${loc.year})<br>
-            Surf Height: ${loc.surf}<br>
-            Notes: ${loc.notes}
+            Surf: ${loc.surf}<br>
+            Notes: ${loc.notes}<br>
+            <a href="${loc.link}" target="_blank" rel="noopener noreferrer">View Surf Media</a>
           `;
           L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(popupContent);
         });
-      })
-      .catch(error => {
-        console.error('Error loading surf-locations.json:', error);
       });
   </script>
 </body>
