@@ -1,132 +1,51 @@
 [
-  {
-    "location": "Ventura Beach, CA",
-    "lat": 34.275,
-    "lng": -119.294,
-    "hurricane": "Hilary",
-    "year": 2023,
-    "surf": "10–15 ft",
-    "notes": "Flooding and injuries from rogue waves",
-    "link": "https://www.surfline.com/surf-news/swell-alert/tracking-major-hurricane-hilary/185309"
-  },
-  {
-    "location": "South County, RI",
-    "lat": 41.450,
-    "lng": -71.650,
-    "hurricane": "Fiona",
-    "year": 2022,
-    "surf": "10 ft",
-    "notes": "Waves damaged infrastructure and closed beaches",
-    "link": "https://www.abc6.com/effects-of-hurricane-fiona-sends-10-foot-waves-to-south-county/"
-  },
-  {
-    "location": "Florida Panhandle",
-    "lat": 30.150,
-    "lng": -85.650,
-    "hurricane": "Michael",
-    "year": 2018,
-    "surf": "20+ ft surge",
-    "notes": "Category 5 storm; extreme coastal flooding",
-    "link": "https://www.naplesnews.com/story/news/local/environment/2018/10/10/hurricane-michael-brings-high-waves-possible-beach-erosion-collier-florida/1589434002/"
-  },
-  {
-    "location": "Long Island, NY",
-    "lat": 40.789,
-    "lng": -73.135,
-    "hurricane": "Lee",
-    "year": 2025,
-    "surf": "6–10 ft",
-    "notes": "Rip currents and beach closures",
-    "link": "https://www.youtube.com/watch?v=nasrzUgqZQg"
-  },
-  {
-    "location": "New Jersey Shore",
-    "lat": 39.650,
-    "lng": -74.170,
-    "hurricane": "Larry",
-    "year": 2025,
-    "surf": "8–12 ft",
-    "notes": "Surfing conditions and coastal erosion",
-    "link": "https://www.urnsurfco.com/hurricane-larry-new-jersey/"
-  },
-  {
-    "location": "Myrtle Beach, SC",
-    "lat": 33.689,
-    "lng": -78.886,
-    "hurricane": "Ian",
-    "year": 2022,
-    "surf": "6–10 ft",
-    "notes": "Waves breached sea walls and flooded streets",
-    "link": "https://www.live5news.com/2022/10/02/video-shows-hurricane-ian-slamming-myrtle-beach-state-park-pier-during-height-storm/"
-  },
-  {
-    "location": "Seacoast, NH",
-    "lat": 43.071,
-    "lng": -70.762,
-    "hurricane": "Teddy",
-    "year": 2020,
-    "surf": "8–10 ft",
-    "notes": "Surfers reported excellent conditions amid warnings",
-    "link": "https://www.seacoastonline.com/story/news/2020/09/23/surfers-delight-hurricane-teddy-brings-big-waves-to-seacoast/42683481/"
-  },
-  {
-    "location": "St. Pete Beach, FL",
-    "lat": 27.725,
-    "lng": -82.741,
-    "hurricane": "Helene",
-    "year": 2024,
-    "surf": "~6 ft",
-    "notes": "Storm waves crashed on shore; beach erosion reported",
-    "link": "https://www.rnz.co.nz/news/world/529252/in-pictures-hurricane-helene-batters-florida"
-  },
-  {
-    "location": "Galveston, TX",
-    "lat": 29.301,
-    "lng": -94.797,
-    "hurricane": "Harvey",
-    "year": 2017,
-    "surf": "12–18 ft",
-    "notes": "Massive flooding and storm surge",
-    "link": "https://www.nbcnews.com/slideshow/news/photos-hurricane-harvey-slams-texas-n796226"
-  },
-  {
-    "location": "Outer Banks, NC",
-    "lat": 35.558,
-    "lng": -75.466,
-    "hurricane": "Dorian",
-    "year": 2019,
-    "surf": "10–14 ft",
-    "notes": "Beach erosion and evacuations",
-    "link": "https://www.wral.com/hurricane-dorian-brings-heavy-rain-strong-winds-to-nc-coast/18616569/"
-  },
-  {
-    "location": "Cape Cod, MA",
-    "lat": 41.668,
-    "lng": -70.296,
-    "hurricane": "Henri",
-    "year": 2021,
-    "surf": "7–11 ft",
-    "notes": "Strong surf and coastal flooding",
-    "link": "https://www.capecodtimes.com/story/news/2021/08/22/hurricane-henri-brings-heavy-rain-strong-winds-coastal-flooding-cape-cod/8238828002/"
-  },
-  {
-    "location": "Santa Cruz, CA",
-    "lat": 36.951,
-    "lng": -122.026,
-    "hurricane": "Kay",
-    "year": 2022,
-    "surf": "5–8 ft",
-    "notes": "Unusual Pacific swell; minor flooding",
-    "link": "https://www.surfline.com/surf-news/hurricane-kay-brings-rare-south-swell-to-california/157839"
-  },
-  {
-    "location": "Tybee Island, GA",
-    "lat": 32.000,
-    "lng": -80.850,
-    "hurricane": "Idalia",
-    "year": 2023,
-    "surf": "9–13 ft",
-    "notes": "Storm surge flooded low-lying areas",
-    "link": "https://www.savannahnow.com/story/news/2023/08/30/hurricane-idalia-tybee-island-georgia-storm-surge-flooding/70752694007/"
-  }
+    {
+        "name": "Milton",
+        "category": 1,
+        "coordinates": [30.63, -87.04],
+        "shape": "marker",
+        "color": "#a6cee3"
+    },
+    {
+        "name": "Ian",
+        "category": 4,
+        "coordinates": [26.70, -82.26],
+        "shape": "marker",
+        "color": "#1f78b4"
+    },
+    {
+        "name": "Irma",
+        "category": 5,
+        "coordinates": [25.76, -80.19],
+        "shape": "marker",
+        "color": "#08306b"
+    },
+    {
+        "name": "Michael",
+        "category": 5,
+        "coordinates": [29.72, -85.39],
+        "shape": "marker",
+        "color": "#08306b"
+    },
+    {
+        "name": "Charley",
+        "category": 4,
+        "coordinates": [26.92, -82.05],
+        "shape": "marker",
+        "color": "#1f78b4"
+    },
+    {
+        "name": "Frances",
+        "category": 2,
+        "coordinates": [27.65, -80.38],
+        "shape": "marker",
+        "color": "#6baed6"
+    },
+    {
+        "name": "Jeanne",
+        "category": 3,
+        "coordinates": [27.95, -80.55],
+        "shape": "marker",
+        "color": "#2171b5"
+    }
 ]
