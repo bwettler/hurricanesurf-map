@@ -1,51 +1,51 @@
 [
-    {
-        "name": "Milton",
-        "category": 1,
-        "coordinates": [30.63, -87.04],
-        "shape": "marker",
-        "color": "#a6cee3"
-    },
-    {
-        "name": "Ian",
-        "category": 4,
-        "coordinates": [26.70, -82.26],
-        "shape": "marker",
-        "color": "#1f78b4"
-    },
-    {
-        "name": "Irma",
-        "category": 5,
-        "coordinates": [25.76, -80.19],
-        "shape": "marker",
-        "color": "#08306b"
-    },
-    {
-        "name": "Michael",
-        "category": 5,
-        "coordinates": [29.72, -85.39],
-        "shape": "marker",
-        "color": "#08306b"
-    },
-    {
-        "name": "Charley",
-        "category": 4,
-        "coordinates": [26.92, -82.05],
-        "shape": "marker",
-        "color": "#1f78b4"
-    },
-    {
-        "name": "Frances",
-        "category": 2,
-        "coordinates": [27.65, -80.38],
-        "shape": "marker",
-        "color": "#6baed6"
-    },
-    {
-        "name": "Jeanne",
-        "category": 3,
-        "coordinates": [27.95, -80.55],
-        "shape": "marker",
-        "color": "#2171b5"
-    }
+  {
+    "name": "Milton",
+    "category": 1,
+    "coordinates": [30.63, -87.04],
+    "color": "#a6cee3",
+    "icon": "images/hurricane.png"
+  },
+  {
+    "name": "Ian",
+    "category": 4,
+    "coordinates": [26.70, -82.26],
+    "color": "#1f78b4",
+    "icon": "images/hurricane.png"
+  },
+  {
+    "name": "Irma",
+    "category": 5,
+    "coordinates": [25.76, -80.19],
+    "color": "#08306b",
+    "icon": "images/hurricane.png"
+  },
+  {
+    "name": "Michael",
+    "category": 5,
+    "coordinates": [29.72, -85.39],
+    "color": "#08306b",
+    "icon": "images/hurricane.png"
+  },
+  {
+    "name": "Charley",
+    "category": 4,
+    "coordinates": [26.92, -82.05],
+    "color": "#1f78b4",
+    "icon": "images/hurricane.png"
+  },
+  {
+    "name": "Frances",
+    "category": 2,
+    "coordinates": [27.65, -80.38],
+    "color": "#6baed6",
+    "icon": "images/hurricane.png"
+  },
+  {
+    "name": "Jeanne",
+    "category": 3,
+    "coordinates": [27.95, -80.55],
+    "color": "#2171b5",
+    "icon": "images/hurricane.png"
+  }
 ]
