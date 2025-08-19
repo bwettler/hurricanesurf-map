@@ -1,4 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="32" height="32">
-  <circle cx="32" cy="32" r="28" fill="none" stroke="black" stroke-width="4"/>
-  <circle cx="32" cy="32" r="6" fill="black"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 64 64" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer swirl segments -->
+  <path d="M10,32 A22,22 0 0,1 32,10" stroke="black" stroke-width="1" fill="none"/>
+  <path d="M32,10 A22,22 0 0,1 54,32" stroke="black" stroke-width="1" fill="none"/>
+  <path d="M54,32 A22,22 0 0,1 32,54" stroke="black" stroke-width="1" fill="none"/>
+  <path d="M32,54 A22,22 0 0,1 10,32" stroke="black" stroke-width="1" fill="none"/>
+
+  <!-- Inner swirl segments -->
+  <path d="M20,32 A12,12 0 0,1 32,20" stroke="black" stroke-width="1" fill="none"/>
+  <path d="M32,20 A12,12 0 0,1 44,32" stroke="black" stroke-width="1" fill="none"/>
+  <path d="M44,32 A12,12 0 0,1 32,44" stroke="black" stroke-width="1" fill="none"/>
+  <path d="M32,44 A12,12 0 0,1 20,32" stroke="black" stroke-width="1" fill="none"/>
+
+  <!-- Eye of the hurricane -->
+  <circle cx="32" cy="32" r="3" stroke="black" stroke-width="1" fill="none"/>
 </svg>
