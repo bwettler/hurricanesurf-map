@@ -6,7 +6,8 @@
   <title>Hurricane Surf Map</title>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
       font-family: sans-serif;
       background-color: #f9f9f9;
@@ -30,7 +31,7 @@
 
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
   <script>
-    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'; // Replace with your token
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYndldHRsZXIiLCJhIjoiY21laml1MWVvMGN4czJxbjF6anozZGhmNiJ9.V8v4oYH3HQK1-ILq7fVfTg';
 
     const map = new mapboxgl.Map({
       container: 'map',
@@ -40,18 +41,15 @@
     });
 
     map.on('load', () => {
-      // Load your SVG icon
       map.loadImage('images/hurricane.svg', (error, image) => {
         if (error) throw error;
         map.addImage('hurricane-icon', image);
 
-        // Load GeoJSON data
         map.addSource('surf-events', {
           type: 'geojson',
-          data: 'surf-locations.geojson' // Replace with your actual file
+          data: 'surf-locations.geojson'
         });
 
-        // Add symbol layer with scalable icon
         map.addLayer({
           id: 'surf-layer',
           type: 'symbol',
@@ -72,7 +70,6 @@
           }
         });
 
-        // Add popups
         map.on('click', 'surf-layer', (e) => {
           const props = e.features[0].properties;
           const html = `
