@@ -15,7 +15,7 @@
 <div id="map"></div>
 
 <script>
-  mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'; // Replace with your token
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXVzZXIiLCJhIjoiY2t2b3Z4cGZxMDJ0cTJubzZ5Z3Z3Z2Z3dyJ9.abc123XYZ'; // Replace with your actual token
 
   const map = new mapboxgl.Map({
     container: 'map',
@@ -25,18 +25,15 @@
   });
 
   map.on('load', () => {
-    // Add your hurricane icon
-    map.loadImage('https://yourdomain.com/icons/hurricane.svg', (error, image) => {
+    map.loadImage('images/hurricane.svg', (error, image) => {
       if (error) throw error;
       map.addImage('hurricane-icon', image);
 
-      // Add GeoJSON source
       map.addSource('hurricanes', {
         type: 'geojson',
-        data: 'hurricane_surf_events.geojson' // Replace with your actual file path or URL
+        data: 'surf-locations.geojson'
       });
 
-      // Add symbol layer with dynamic scaling
       map.addLayer({
         id: 'hurricane-layer',
         type: 'symbol',
@@ -57,7 +54,6 @@
         }
       });
 
-      // Optional: Add popups
       map.on('click', 'hurricane-layer', (e) => {
         const props = e.features[0].properties;
         new mapboxgl.Popup()
@@ -72,7 +68,6 @@
           .addTo(map);
       });
 
-      // Change cursor on hover
       map.on('mouseenter', 'hurricane-layer', () => {
         map.getCanvas().style.cursor = 'pointer';
       });
