@@ -128,5 +128,45 @@
     "surf": "9–13 ft",
     "notes": "Storm surge flooded low-lying areas",
     "link": "https://www.savannahnow.com/story/news/2023/08/30/hurricane-idalia-tybee-island-georgia-storm-surge-flooding/70752694007/"
+  },
+  {
+    "location": "Fort Myers, FL",
+    "lat": 26.640,
+    "lng": -82.000,
+    "hurricane": "Charlie",
+    "year": 2004,
+    "surf": "10–14 ft",
+    "notes": "Category 4 landfall; major coastal damage",
+    "link": "https://www.nhc.noaa.gov/archive/2004/CHARLEY.shtml"
+  },
+  {
+    "location": "Naples, FL",
+    "lat": 26.142,
+    "lng": -82.000,
+    "hurricane": "Irma",
+    "year": 2017,
+    "surf": "12–16 ft",
+    "notes": "Historic storm surge and flooding",
+    "link": "https://www.naplesnews.com/story/news/local/2017/09/10/hurricane-irma-hits-naples-florida/651156001/"
+  },
+  {
+    "location": "Sanibel Island, FL",
+    "lat": 26.448,
+    "lng": -82.000,
+    "hurricane": "Ian",
+    "year": 2022,
+    "surf": "15–20 ft",
+    "notes": "Devastating surge; bridge destroyed",
+    "link": "https://www.nytimes.com/2022/09/29/us/hurricane-ian-sanibel-island.html"
+  },
+  {
+    "location": "Clearwater Beach, FL",
+    "lat": 27.977,
+    "lng": -83.800,
+    "hurricane": "Milton",
+    "year": 2025,
+    "surf": "8–12 ft",
+    "notes": "Strong swell and beach erosion",
+    "link": "https://www.noaa.gov/news/hurricane-milton-2025-impact-summary"
   }
 ]
