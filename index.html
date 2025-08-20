@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hurricane Surf Map</title>
-  <!-- Load Leaflet CSS before scripts -->
+
+  <!-- Leaflet CSS must load before map initialization -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
       height: 100%;
+      margin: 0;
     }
     #map {
       width: 100%;
@@ -23,38 +24,71 @@
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Create the map only after the DOM exists
       const map = L.map('map');
 
-      // Tile layer
+      // Base tiles
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
 
-      fetch('surf-locations.json')
-        .then(res => res.json())
+      // Set a safe default view so the map is visible even if data fails
+      map.setView([30, -75], 3);
+
+      // Fetch plain JSON (lat/lng, not GeoJSON)
+      fetch('surf-locations.json', { cache: 'no-cache' })
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
         .then(locations => {
           const latLngs = [];
 
           locations.forEach(loc => {
-            // Expecting: { "lat": number, "lon": number, "name": "..." }
-            const marker = L.marker([loc.lat, loc.lon])
-              .bindPopup(`<strong>${loc.name}</strong>`);
-            marker.addTo(map);
-            latLngs.push([loc.lat, loc.lon]);
+            const lat = Number(loc.lat);
+            const lng = Number(loc.lng);
+
+            // Skip any entries missing valid numbers
+            if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+            const popup = `
+              <strong>${loc.location}</strong><br>
+              Hurricane: ${loc.hurricane} (${loc.year})<br>
+              Surf: ${loc.surf}<br>
+              ${loc.notes}<br>
+              <a href="${loc.link}" target="_blank" rel="noopener">More info</a>
+            `;
+
+            L.marker([lat, lng], { title: loc.location })
+              .bindPopup(popup)
+              .addTo(map);
+
+            latLngs.push([lat, lng]);
           });
 
           if (latLngs.length) {
             const bounds = L.latLngBounds(latLngs);
-            map.fitBounds(bounds.pad(0.2));
+            if (bounds.isValid()) {
+              map.fitBounds(bounds.pad(0.2));
+            }
           }
 
-          // Let Leaflet recalc size/layout after rendering
+          // Ensure Leaflet recalculates after layout/paint
           setTimeout(() => map.invalidateSize(), 0);
         })
-        .catch(err => console.error('Error loading locations:', err));
+        .catch(err => {
+          console.error('Error loading locations:', err);
+          // Still force a re-measure so the map renders correctly
+          setTimeout(() => map.invalidateSize(), 0);
+        });
+
+      // Extra safety: when all assets are loaded, re-measure once more
+      window.addEventListener('load', () => map.invalidateSize());
     });
   </script>
 </body>
 </html>
+```
