@@ -2,7 +2,7 @@
   {
     "location": "Ventura Beach, CA",
     "lat": 34.275,
-    "lng": -119.294,
+    "lng": -119.150,
     "hurricane": "Hilary",
     "year": 2023,
     "surf": "10–15 ft",
@@ -12,7 +12,7 @@
   {
     "location": "South County, RI",
     "lat": 41.450,
-    "lng": -71.650,
+    "lng": -71.500,
     "hurricane": "Fiona",
     "year": 2022,
     "surf": "10 ft",
@@ -22,7 +22,7 @@
   {
     "location": "Florida Panhandle",
     "lat": 30.150,
-    "lng": -85.650,
+    "lng": -85.500,
     "hurricane": "Michael",
     "year": 2018,
     "surf": "20+ ft surge",
@@ -32,7 +32,7 @@
   {
     "location": "Long Island, NY",
     "lat": 40.789,
-    "lng": -73.135,
+    "lng": -72.950,
     "hurricane": "Lee",
     "year": 2025,
     "surf": "6–10 ft",
@@ -42,7 +42,7 @@
   {
     "location": "New Jersey Shore",
     "lat": 39.650,
-    "lng": -74.170,
+    "lng": -74.000,
     "hurricane": "Larry",
     "year": 2025,
     "surf": "8–12 ft",
@@ -52,7 +52,7 @@
   {
     "location": "Myrtle Beach, SC",
     "lat": 33.689,
-    "lng": -78.886,
+    "lng": -78.700,
     "hurricane": "Ian",
     "year": 2022,
     "surf": "6–10 ft",
@@ -62,7 +62,7 @@
   {
     "location": "Seacoast, NH",
     "lat": 43.071,
-    "lng": -70.762,
+    "lng": -70.600,
     "hurricane": "Teddy",
     "year": 2020,
     "surf": "8–10 ft",
@@ -72,7 +72,7 @@
   {
     "location": "St. Pete Beach, FL",
     "lat": 27.725,
-    "lng": -82.741,
+    "lng": -82.600,
     "hurricane": "Helene",
     "year": 2024,
     "surf": "~6 ft",
@@ -82,7 +82,7 @@
   {
     "location": "Galveston, TX",
     "lat": 29.301,
-    "lng": -94.797,
+    "lng": -94.600,
     "hurricane": "Harvey",
     "year": 2017,
     "surf": "12–18 ft",
@@ -92,7 +92,7 @@
   {
     "location": "Outer Banks, NC",
     "lat": 35.558,
-    "lng": -75.466,
+    "lng": -75.300,
     "hurricane": "Dorian",
     "year": 2019,
     "surf": "10–14 ft",
@@ -102,7 +102,7 @@
   {
     "location": "Cape Cod, MA",
     "lat": 41.668,
-    "lng": -70.296,
+    "lng": -70.150,
     "hurricane": "Henri",
     "year": 2021,
     "surf": "7–11 ft",
@@ -112,7 +112,7 @@
   {
     "location": "Santa Cruz, CA",
     "lat": 36.951,
-    "lng": -122.026,
+    "lng": -121.850,
     "hurricane": "Kay",
     "year": 2022,
     "surf": "5–8 ft",
@@ -122,7 +122,7 @@
   {
     "location": "Tybee Island, GA",
     "lat": 32.000,
-    "lng": -80.850,
+    "lng": -80.700,
     "hurricane": "Idalia",
     "year": 2023,
     "surf": "9–13 ft",
