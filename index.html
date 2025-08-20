@@ -1,71 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Hurricane Surf Map</title>
-  <!-- Leaflet CSS must load before any script runs -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
     #map {
+      height: 100vh;
       width: 100%;
-      height: 100%;
     }
   </style>
 </head>
 <body>
   <div id="map"></div>
 
-  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Create map after DOM is ready
-      const map = L.map('map');
+    const map = L.map('map').setView([25.0, -80.0], 6);
 
-      // Add tiles
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-      }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-      // Fetch plain JSON (array of objects with lat/lng)
-      fetch('surf-locations.json')
-        .then(res => res.json())
-        .then(locations => {
-          const latLngs = [];
+    function createIcon(zoom) {
+      const size = Math.max(16, zoom * 2);
+      const iconPath = 'images/hurricane.svg';
 
-          locations.forEach(loc => {
-            // Uses your keys: lat + lng and location
-            const marker = L.marker([loc.lat, loc.lng])
-              .bindPopup(`
-                <strong>${loc.location}</strong><br>
-                Hurricane: ${loc.hurricane} (${loc.year})<br>
-                Surf: ${loc.surf}<br>
-                ${loc.notes}<br>
-                <a href="${loc.link}" target="_blank" rel="noopener">More info</a>
-              `);
+      const img = new Image();
+      img.src = iconPath;
+      img.onerror = () => console.warn(`⚠️ Failed to load icon: ${iconPath}`);
 
-            marker.addTo(map);
-            latLngs.push([loc.lat, loc.lng]);
+      return L.icon({
+        iconUrl: iconPath,
+        iconSize: [size, size],
+        iconAnchor: [size / 2, size / 2]
+      });
+    }
+
+    let markers = [];
+
+    fetch('surf-locations.json')
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        data.forEach(loc => {
+          const marker = L.marker([loc.lat, loc.lng], {
+            icon: createIcon(map.getZoom())
+          }).bindPopup(`<strong>${loc.location}</strong><br>${loc.description || ''}`)
+            .addTo(map);
+          markers.push(marker);
+        });
+
+        map.on('zoomend', () => {
+          const newZoom = map.getZoom();
+          markers.forEach(marker => {
+            const popup = marker.getPopup();
+            marker.setIcon(createIcon(newZoom));
+            if (popup && popup.isOpen()) {
+              marker.bindPopup(popup.getContent());
+            }
           });
-
-          if (latLngs.length) {
-            const bounds = L.latLngBounds(latLngs);
-            map.fitBounds(bounds.pad(0.2));
-          }
-
-          // Recalculate size after layout
-          setTimeout(() => {
-            map.invalidateSize();
-          }, 0);
-        })
-        .catch(err => console.error('Error loading locations:', err));
-    });
+        });
+      })
+      .catch(err => {
+        console.error('❌ Failed to load surf-locations.json:', err);
+        alert('Error loading surf location data. Please try again later.');
+      });
   </script>
 </body>
 </html>
