@@ -9,6 +9,8 @@
     #map {
       height: 100vh;
       width: 100%;
+      margin: 0;
+      padding: 0;
     }
   </style>
 </head>
@@ -17,14 +19,8 @@
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    const map = L.map('map').setView([25.0, -80.0], 6);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
     const ICON_PATH = 'images/hurricane.svg';
-    const FIXED_ICON_SIZE = 24; // px
+    const FIXED_ICON_SIZE = 24; // consistent visual scale
 
     function createIcon() {
       return L.icon({
@@ -55,6 +51,7 @@
     .then(([_, data]) => {
       console.log('✅ Hurricane SVG preloaded:', ICON_PATH);
 
+      // Create markers from JSON data
       data.forEach(loc => {
         const marker = L.marker([loc.lat, loc.lng], {
           icon: createIcon()
@@ -64,10 +61,23 @@
           `${loc.surf || ''}<br>` +
           `${loc.notes || ''}<br>` +
           `<a href="${loc.link}" target="_blank">More info</a>`
-        ).addTo(map);
-
+        );
         markers.push(marker);
       });
+
+      // Add tile layer with Retina scaling disabled
+      const map = L.map('map');
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        detectRetina: false
+      }).addTo(map);
+
+      // Add all markers to the map
+      const markerLayer = L.layerGroup(markers).addTo(map);
+
+      // Auto-fit to all marker bounds
+      const bounds = markerLayer.getBounds();
+      map.fitBounds(bounds, { padding: [20, 20] });
     })
     .catch(err => {
       console.error('❌ Initialization error:', err);
