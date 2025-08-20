@@ -4,103 +4,49 @@
     {
       "type": "Feature",
       "properties": {
-        "location": "Ventura Beach, CA",
-        "hurricane": "Hilary",
-        "year": 2023,
-        "surf": "10–15 ft",
-        "notes": "Flooding and injuries from rogue waves",
-        "link": "https://www.surfline.com/surf-news/swell-alert/tracking-major-hurricane-hilary/185309",
-        "radius": 5,
-        "icon": "hurricane.svg"
+        "location": "Sebastian Inlet, FL",
+        "hurricane": "Dorian",
+        "year": 2019,
+        "surf": "Overhead barrels",
+        "notes": "Classic hurricane setup with clean conditions",
+        "link": "https://example.com/dorian-sebastian",
+        "icon": "image/hurricane.svg"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-120.000, 34.275]
+        "coordinates": [-80.4518, 27.8575]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "location": "South County, RI",
-        "hurricane": "Fiona",
-        "year": 2022,
-        "surf": "10 ft",
-        "notes": "Waves damaged infrastructure and closed beaches",
-        "link": "https://www.abc6.com/effects-of-hurricane-fiona-sends-10-foot-waves-to-south-county/",
-        "radius": 5,
-        "icon": "hurricane.svg"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-70.000, 41.450]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "location": "Florida Panhandle",
-        "hurricane": "Michael",
+        "location": "Cape Hatteras, NC",
+        "hurricane": "Florence",
         "year": 2018,
-        "surf": "20+ ft surge",
-        "notes": "Category 5 storm; extreme coastal flooding",
-        "link": "https://www.naplesnews.com/story/news/local/environment/2018/10/10/hurricane-michael-brings-high-waves-possible-beach-erosion-collier-florida/1589434002/",
-        "radius": 10,
-        "icon": "hurricane.svg"
+        "surf": "Double overhead",
+        "notes": "Powerful swell with long period",
+        "link": "https://example.com/florence-hatteras",
+        "icon": "image/hurricane.svg"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-86.800, 30.000]
+        "coordinates": [-75.5400, 35.2500]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "location": "Long Island, NY",
-        "hurricane": "Lee",
-        "year": 2025,
-        "surf": "6–10 ft",
-        "notes": "Rip currents and beach closures",
-        "link": "https://www.youtube.com/watch?v=nasrzUgqZQg",
-        "radius": 5,
-        "icon": "hurricane.svg"
+        "location": "Rincon, PR",
+        "hurricane": "Maria",
+        "year": 2017,
+        "surf": "Heavy reef break",
+        "notes": "Rare hurricane swell from the south",
+        "link": "https://example.com/maria-rincon",
+        "icon": "image/hurricane.svg"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-72.000, 40.789]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "location": "New Jersey Shore",
-        "hurricane": "Larry",
-        "year": 2025,
-        "surf": "8–12 ft",
-        "notes": "Surfing conditions and coastal erosion",
-        "link": "https://www.urnsurfco.com/hurricane-larry-new-jersey/",
-        "radius": 5,
-        "icon": "hurricane.svg"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-73.000, 39.650]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "location": "Myrtle Beach, SC",
-        "hurricane": "Ian",
-        "year": 2022,
-        "surf": "6–10 ft",
-        "notes": "Waves breached\\n",
-        "link": "",
-        "radius": 5,
-        "icon": "hurricane.svg"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-78.880, 33.689]
+        "coordinates": [-67.2500, 18.3500]
       }
     }
   ]
