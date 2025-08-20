@@ -2,12 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Hurricane Surf Map</title>
+  <title>Hurricane Surf Map – Diagnostic</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
     #map {
-      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
       width: 100%;
       margin: 0;
       padding: 0;
@@ -20,7 +30,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     const ICON_PATH = 'images/hurricane.svg';
-    const FIXED_ICON_SIZE = 24; // consistent visual scale
+    const FIXED_ICON_SIZE = 24;
 
     function createIcon() {
       return L.icon({
@@ -39,49 +49,37 @@
       });
     }
 
-    let markers = [];
-
     Promise.all([
       preloadIcon(ICON_PATH),
-      fetch('surf-locations.json').then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
+      fetch('surf-locations.json').then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
       })
     ])
     .then(([_, data]) => {
-      console.log('✅ Hurricane SVG preloaded:', ICON_PATH);
+      const markers = data.map(loc => 
+        L.marker([loc.lat, loc.lng], { icon: createIcon() })
+          .bindPopup(
+            `<strong>${loc.location}</strong><br>` +
+            `${loc.hurricane} (${loc.year})<br>` +
+            `${loc.surf || ''}<br>` +
+            `${loc.notes || ''}<br>` +
+            `<a href="${loc.link}" target="_blank">More info</a>`
+          )
+      );
 
-      // Create markers from JSON data
-      data.forEach(loc => {
-        const marker = L.marker([loc.lat, loc.lng], {
-          icon: createIcon()
-        }).bindPopup(
-          `<strong>${loc.location}</strong><br>` +
-          `${loc.hurricane} (${loc.year})<br>` +
-          `${loc.surf || ''}<br>` +
-          `${loc.notes || ''}<br>` +
-          `<a href="${loc.link}" target="_blank">More info</a>`
-        );
-        markers.push(marker);
-      });
-
-      // Add tile layer with Retina scaling disabled
       const map = L.map('map');
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors',
         detectRetina: false
       }).addTo(map);
 
-      // Add all markers to the map
-      const markerLayer = L.layerGroup(markers).addTo(map);
-
-      // Auto-fit to all marker bounds
-      const bounds = markerLayer.getBounds();
-      map.fitBounds(bounds, { padding: [20, 20] });
+      const group = L.layerGroup(markers).addTo(map);
+      map.fitBounds(group.getBounds(), { padding: [20, 20] });
     })
     .catch(err => {
       console.error('❌ Initialization error:', err);
-      alert('Error initializing map assets. Please try again later.');
+      alert('Error initializing map assets.');
     });
   </script>
 </body>
