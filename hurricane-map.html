@@ -1,81 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hurricane Surf Map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    body { margin: 0; padding: 0; }
-    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    #map {
+      height: 600px;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
-<div id="map"></div>
+  <h1>Hurricane Surf Events</h1>
+  <div id="map"></div>
 
-<script>
-  mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXVzZXIiLCJhIjoiY2t2b3Z4cGZxMDJ0cTJubzZ5Z3Z3Z2Z3dyJ9.abc123XYZ'; // Replace with your actual token
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([37.8, -96], 4);
 
-  const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/light-v11',
-    center: [-80, 30],
-    zoom: 4
-  });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-  map.on('load', () => {
-    map.loadImage('images/hurricane.svg', (error, image) => {
-      if (error) throw error;
-      map.addImage('hurricane-icon', image);
+    // Base SVG icon template
+    function createIcon(zoom) {
+      const size = Math.max(16, zoom * 2); // Scale with zoom
+      const svg = `
+        <svg width="${size}" height="${size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="30" fill="#0077be" stroke="#fff" stroke-width="4"/>
+          <path d="M32 12 C42 12, 52 22, 52 32 C52 42, 42 52, 32 52 C22 52, 12 42, 12 32 C12 22, 22 12, 32 12 Z" fill="#fff"/>
+        </svg>
+      `;
+      return L.divIcon({
+        html: svg,
+        className: '',
+        iconSize: [size, size],
+        iconAnchor: [size / 2, size / 2]
+      });
+    }
 
-      map.addSource('hurricanes', {
-        type: 'geojson',
-        data: 'surf-locations.geojson'
+    let geojsonLayer;
+
+    // Load GeoJSON and render markers
+    fetch('surf-locations.geojson')
+      .then(response => response.json())
+      .then(data => {
+        geojsonLayer = L.geoJSON(data, {
+          pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, {
+              icon: createIcon(map.getZoom())
+            }).bindPopup(`
+              <strong>${feature.properties.location}</strong><br>
+              Hurricane: ${feature.properties.hurricane} (${feature.properties.year})<br>
+              Surf: ${feature.properties.surf}<br>
+              Notes: ${feature.properties.notes}<br>
+              <a href="${feature.properties.link}" target="_blank" rel="noopener noreferrer">View Surf Media</a>
+            `);
+          }
+        }).addTo(map);
       });
 
-      map.addLayer({
-        id: 'hurricane-layer',
-        type: 'symbol',
-        source: 'hurricanes',
-        layout: {
-          'icon-image': 'hurricane-icon',
-          'icon-size': [
-            'interpolate',
-            ['linear'],
-            ['zoom'],
-            4, 0.4,
-            6, 0.6,
-            8, 0.8,
-            10, 1.2,
-            12, 1.6
-          ],
-          'icon-allow-overlap': true
+    // Update icon size on zoom
+    map.on('zoomend', () => {
+      const newZoom = map.getZoom();
+      geojsonLayer.eachLayer(layer => {
+        const latlng = layer.getLatLng();
+        const popup = layer.getPopup();
+        layer.setIcon(createIcon(newZoom));
+        if (popup && popup.isOpen()) {
+          layer.bindPopup(popup.getContent());
         }
       });
-
-      map.on('click', 'hurricane-layer', (e) => {
-        const props = e.features[0].properties;
-        new mapboxgl.Popup()
-          .setLngLat(e.lngLat)
-          .setHTML(`
-            <strong>${props.location}</strong><br>
-            Hurricane ${props.hurricane} (${props.year})<br>
-            Surf: ${props.surf}<br>
-            ${props.notes}<br>
-            <a href="${props.link}" target="_blank">More info</a>
-          `)
-          .addTo(map);
-      });
-
-      map.on('mouseenter', 'hurricane-layer', () => {
-        map.getCanvas().style.cursor = 'pointer';
-      });
-      map.on('mouseleave', 'hurricane-layer', () => {
-        map.getCanvas().style.cursor = '';
-      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>
