@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 64 64" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
-  <!-- Outer swirl segments -->
-  <path d="M10,32 A22,22 0 0,1 32,10" stroke="black" stroke-width="1" fill="none"/>
-  <path d="M32,10 A22,22 0 0,1 54,32" stroke="black" stroke-width="1" fill="none"/>
-  <path d="M54,32 A22,22 0 0,1 32,54" stroke="black" stroke-width="1" fill="none"/>
-  <path d="M32,54 A22,22 0 0,1 10,32" stroke="black" stroke-width="1" fill="none"/>
+  <!-- Single continuous spiral - 3 full revolutions, oval shaped, dashed -->
+  <path d="M32,32 
+           L34,32 
+           A2,1.5 0 0,1 32,33.5
+           A4,3 0 0,1 28,32
+           A6,4.5 0 0,1 32,27.5
+           A8,6 0 0,1 40,32
+           A10,7.5 0 0,1 32,39.5
+           A12,9 0 0,1 20,32
+           A14,10.5 0 0,1 32,21.5
+           A16,12 0 0,1 48,32
+           A18,13.5 0 0,1 32,45.5
+           A20,15 0 0,1 12,32
+           A22,16.5 0 0,1 32,15.5" 
+        stroke="black" stroke-width="1" fill="none" stroke-linecap="round"         stroke-dasharray="15.75,5.25,5.25,5.25"/>
 
-  <!-- Inner swirl segments -->
-  <path d="M20,32 A12,12 0 0,1 32,20" stroke="black" stroke-width="1" fill="none"/>
-  <path d="M32,20 A12,12 0 0,1 44,32" stroke="black" stroke-width="1" fill="none"/>
-  <path d="M44,32 A12,12 0 0,1 32,44" stroke="black" stroke-width="1" fill="none"/>
-  <path d="M32,44 A12,12 0 0,1 20,32" stroke="black" stroke-width="1" fill="none"/>
-
-  <!-- Eye of the hurricane -->
-  <circle cx="32" cy="32" r="3" stroke="black" stroke-width="1" fill="none"/>
+  <!-- Hollow eye at center -->
+  <circle cx="32" cy="32" r="2" stroke="black" stroke-width="0.8" fill="none"/>
 </svg>
