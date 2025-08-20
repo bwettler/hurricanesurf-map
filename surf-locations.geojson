@@ -11,7 +11,7 @@
         "notes": "Flooding and injuries from rogue waves",
         "link": "https://www.surfline.com/surf-news/swell-alert/tracking-major-hurricane-hilary/185309",
         "radius": 5,
-        "marker-symbol": "hurricane.svg"
+        "icon": "hurricane.svg"
       },
       "geometry": {
         "type": "Point",
@@ -28,7 +28,7 @@
         "notes": "Waves damaged infrastructure and closed beaches",
         "link": "https://www.abc6.com/effects-of-hurricane-fiona-sends-10-foot-waves-to-south-county/",
         "radius": 5,
-        "marker-symbol": "hurricane.svg"
+        "icon": "hurricane.svg"
       },
       "geometry": {
         "type": "Point",
@@ -45,7 +45,7 @@
         "notes": "Category 5 storm; extreme coastal flooding",
         "link": "https://www.naplesnews.com/story/news/local/environment/2018/10/10/hurricane-michael-brings-high-waves-possible-beach-erosion-collier-florida/1589434002/",
         "radius": 10,
-        "marker-symbol": "hurricane.svg"
+        "icon": "hurricane.svg"
       },
       "geometry": {
         "type": "Point",
@@ -62,7 +62,7 @@
         "notes": "Rip currents and beach closures",
         "link": "https://www.youtube.com/watch?v=nasrzUgqZQg",
         "radius": 5,
-        "marker-symbol": "hurricane.svg"
+        "icon": "hurricane.svg"
       },
       "geometry": {
         "type": "Point",
@@ -79,7 +79,7 @@
         "notes": "Surfing conditions and coastal erosion",
         "link": "https://www.urnsurfco.com/hurricane-larry-new-jersey/",
         "radius": 5,
-        "marker-symbol": "hurricane.svg"
+        "icon": "hurricane.svg"
       },
       "geometry": {
         "type": "Point",
@@ -96,7 +96,7 @@
         "notes": "Waves breached\\n",
         "link": "",
         "radius": 5,
-        "marker-symbol": "hurricane.svg"
+        "icon": "hurricane.svg"
       },
       "geometry": {
         "type": "Point",
