@@ -24,9 +24,9 @@
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Base SVG icon template
+    // This function creates your SVG hurricane icon and scales it with zoom
     function createIcon(zoom) {
-      const size = Math.max(16, zoom * 2); // Scale with zoom
+      const size = Math.max(16, zoom * 2);
       const svg = `
         <svg width="${size}" height="${size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <circle cx="32" cy="32" r="30" fill="#0077be" stroke="#fff" stroke-width="4"/>
@@ -43,7 +43,7 @@
 
     let geojsonLayer;
 
-    // Load GeoJSON and render markers
+    // Load your GeoJSON file and place SVG markers
     fetch('surf-locations.geojson')
       .then(response => response.json())
       .then(data => {
@@ -62,7 +62,7 @@
         }).addTo(map);
       });
 
-    // Update icon size on zoom
+    // Update icon size when zoom changes
     map.on('zoomend', () => {
       const newZoom = map.getZoom();
       geojsonLayer.eachLayer(layer => {
