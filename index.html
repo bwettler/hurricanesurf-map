@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <title>Hurricane Surf Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Pin Leaflet version to avoid CSS/JS mismatches -->
   <link
     rel="stylesheet"
-    href="https://unpkg.com/leaflet/dist/leaflet.css"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
   />
   <style>
     html, body {
@@ -15,37 +17,46 @@
       height: 100%;
     }
     #map {
-      height: 100vh; /* full height viewport */
+      height: 100vh;
       width: 100%;
     }
+
+    /* Safety: prevent oversized retina tiles if CSS loads late or is blocked */
+    .leaflet-tile { width: 256px; height: 256px; }
+    .leaflet-container img, .leaflet-container canvas { transform: none !important; }
   </style>
 </head>
 <body>
   <div id="map"></div>
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
-    // Initialize map at desired center/zoom
-    const map = L.map('map').setView([25.0, -80.0], 6);
+    // Initialize map (temporary center; we'll fit to data after load)
+    const map = L.map('map', {
+      zoomControl: true
+    }).setView([25.0, -80.0], 6);
 
-    // Base map tiles
+    // Base tiles with retina disabled to avoid 512px oversize tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
+      attribution: '© OpenStreetMap contributors',
+      detectRetina: false,
+      tileSize: 256,
+      zoomOffset: 0
     }).addTo(map);
 
-    // Fixed‑size hurricane icon (no zoom-based scaling)
+    // Fixed-size hurricane icon (no zoom-based scaling)
     function createIcon() {
       const iconPath = 'images/hurricane.svg';
       return L.icon({
         iconUrl: iconPath,
-        iconSize: [16, 16],      // pixel size
-        iconAnchor: [8, 8]       // center the icon
+        iconSize: [16, 16],
+        iconAnchor: [8, 8] // center the icon on its lat/lng
       });
     }
 
-    let markers = [];
+    const markers = [];
+    const points = [];
 
-    // Load surf locations and plot them
     fetch('surf-locations.json')
       .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -53,18 +64,34 @@
       })
       .then(data => {
         data.forEach(loc => {
-          const marker = L.marker([loc.lat, loc.lng], {
+          const latlng = [loc.lat, loc.lng];
+          points.push(latlng);
+          const marker = L.marker(latlng, {
             icon: createIcon()
-          }).bindPopup(
-            `<strong>${loc.name}</strong><br>${loc.description || ''}`
-          ).addTo(map);
+          })
+          .bindPopup(`<strong>${loc.name}</strong><br>${loc.description || ''}`)
+          .addTo(map);
           markers.push(marker);
         });
+
+        // If we have points, center and zoom to them (with a little padding)
+        if (points.length) {
+          const bounds = L.latLngBounds(points);
+          map.fitBounds(bounds.pad(0.2));
+        }
+
+        // After layout settles, make sure Leaflet recalculates center/tiles
+        setTimeout(() => map.invalidateSize(), 0);
       })
       .catch(err => {
         console.error('❌ Failed to load surf-locations.json:', err);
         alert('Error loading surf location data. Please try again later.');
       });
+
+    // Also invalidate on window load to fix any initial centering issues
+    window.addEventListener('load', () => {
+      map.invalidateSize();
+    });
   </script>
 </body>
 </html>
