@@ -24,28 +24,20 @@
     }).addTo(map);
 
     function createIcon(zoom) {
-      const size = Math.max(16, zoom * 2);
-      const iconPath = 'image/hurricane.svg';
-
-      const img = new Image();
-      img.src = iconPath;
-      img.onerror = () => console.warn(`⚠️ Failed to load icon: ${iconPath}`);
-
+      const size = Math.round(Math.max(24, zoom * 4)); // Scales with zoom
       return L.icon({
-        iconUrl: iconPath,
+        iconUrl: 'image/hurricane.svg',
         iconSize: [size, size],
         iconAnchor: [size / 2, size / 2]
       });
     }
 
-    // Example marker
     const marker = L.marker([25.0, -80.0], {
       icon: createIcon(map.getZoom())
     }).bindPopup('Hurricane Surf Zone').addTo(map);
 
     map.on('zoomend', () => {
-      const newZoom = map.getZoom();
-      marker.setIcon(createIcon(newZoom));
+      marker.setIcon(createIcon(map.getZoom()));
     });
   </script>
 </body>
