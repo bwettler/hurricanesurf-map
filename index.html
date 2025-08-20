@@ -4,10 +4,18 @@
   <meta charset="UTF-8">
   <title>Hurricane Surf Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
     #map {
-      height: 100vh;
+      height: 100vh; /* full height viewport */
       width: 100%;
     }
   </style>
@@ -17,29 +25,27 @@
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
+    // Initialize map at desired center/zoom
     const map = L.map('map').setView([25.0, -80.0], 6);
 
+    // Base map tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    function createIcon(zoom) {
-      const size = Math.max(16, zoom * 2);
+    // Fixed‑size hurricane icon (no zoom-based scaling)
+    function createIcon() {
       const iconPath = 'images/hurricane.svg';
-
-      const img = new Image();
-      img.src = iconPath;
-      img.onerror = () => console.warn(`⚠️ Failed to load icon: ${iconPath}`);
-
       return L.icon({
         iconUrl: iconPath,
-        iconSize: [size, size],
-        iconAnchor: [size / 2, size / 2]
+        iconSize: [16, 16],      // pixel size
+        iconAnchor: [8, 8]       // center the icon
       });
     }
 
     let markers = [];
 
+    // Load surf locations and plot them
     fetch('surf-locations.json')
       .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -48,21 +54,11 @@
       .then(data => {
         data.forEach(loc => {
           const marker = L.marker([loc.lat, loc.lng], {
-            icon: createIcon(map.getZoom())
-          }).bindPopup(`<strong>${loc.name}</strong><br>${loc.description || ''}`)
-            .addTo(map);
+            icon: createIcon()
+          }).bindPopup(
+            `<strong>${loc.name}</strong><br>${loc.description || ''}`
+          ).addTo(map);
           markers.push(marker);
-        });
-
-        map.on('zoomend', () => {
-          const newZoom = map.getZoom();
-          markers.forEach(marker => {
-            const popup = marker.getPopup();
-            marker.setIcon(createIcon(newZoom));
-            if (popup && popup.isOpen()) {
-              marker.bindPopup(popup.getContent());
-            }
-          });
         });
       })
       .catch(err => {
