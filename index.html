@@ -17,16 +17,22 @@
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    const map = L.map('map').setView([37.8, -96], 4);
+    const map = L.map('map').setView([25.0, -80.0], 6);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
     function createIcon(zoom) {
-      const size = Math.round(Math.max(24, zoom * 4)); // scales with zoom
+      const size = Math.max(16, zoom * 2);
+      const iconPath = 'images/hurricane.svg';
+
+      const img = new Image();
+      img.src = iconPath;
+      img.onerror = () => console.warn(`⚠️ Failed to load icon: ${iconPath}`);
+
       return L.icon({
-        iconUrl: 'image/hurricane.svg',
+        iconUrl: iconPath,
         iconSize: [size, size],
         iconAnchor: [size / 2, size / 2]
       });
@@ -41,23 +47,21 @@
       })
       .then(data => {
         data.forEach(loc => {
-          const popupContent = `
-            <strong>${loc.location}</strong><br>
-            Hurricane: ${loc.hurricane} (${loc.year})<br>
-            Surf: ${loc.surf}<br>
-            Notes: ${loc.notes}<br>
-            <a href="${loc.link}" target="_blank" rel="noopener noreferrer">View Surf Media</a>
-          `;
           const marker = L.marker([loc.lat, loc.lng], {
             icon: createIcon(map.getZoom())
-          }).bindPopup(popupContent).addTo(map);
+          }).bindPopup(`<strong>${loc.name}</strong><br>${loc.description || ''}`)
+            .addTo(map);
           markers.push(marker);
         });
 
         map.on('zoomend', () => {
           const newZoom = map.getZoom();
           markers.forEach(marker => {
+            const popup = marker.getPopup();
             marker.setIcon(createIcon(newZoom));
+            if (popup && popup.isOpen()) {
+              marker.bindPopup(popup.getContent());
+            }
           });
         });
       })
