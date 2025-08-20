@@ -4,8 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hurricane Surf Map</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
   <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      background: #003366;
+      color: white;
+      padding: 1rem;
+      margin: 0;
+    }
     #map {
       height: 600px;
       width: 100%;
@@ -16,37 +28,74 @@
   <h1>Hurricane Surf Events</h1>
   <div id="map"></div>
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
   <script>
-    const map = L.map('map').setView([37.8, -96], 4); // Centered on US
+    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'; // Replace with your token
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    const hurricaneIcon = L.icon({
-      iconUrl: 'images/hurricane.svg',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16],
-      popupAnchor: [0, -16]
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [-96, 37.8],
+      zoom: 4
     });
 
-    fetch('surf-locations.json')
-      .then(response => response.json())
-      .then(data => {
-        data.forEach(loc => {
-          const popupContent = `
-            <strong>${loc.location}</strong><br>
-            Hurricane: ${loc.hurricane} (${loc.year})<br>
-            Surf: ${loc.surf}<br>
-            Notes: ${loc.notes}<br>
-            <a href="${loc.link}" target="_blank" rel="noopener noreferrer">View Surf Media</a>
+    map.on('load', () => {
+      // Load your SVG icon
+      map.loadImage('images/hurricane.svg', (error, image) => {
+        if (error) throw error;
+        map.addImage('hurricane-icon', image);
+
+        // Load GeoJSON data
+        map.addSource('surf-events', {
+          type: 'geojson',
+          data: 'surf-locations.geojson' // Replace with your actual file
+        });
+
+        // Add symbol layer with scalable icon
+        map.addLayer({
+          id: 'surf-layer',
+          type: 'symbol',
+          source: 'surf-events',
+          layout: {
+            'icon-image': 'hurricane-icon',
+            'icon-size': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              4, 0.4,
+              6, 0.6,
+              8, 0.8,
+              10, 1.2,
+              12, 1.6
+            ],
+            'icon-allow-overlap': true
+          }
+        });
+
+        // Add popups
+        map.on('click', 'surf-layer', (e) => {
+          const props = e.features[0].properties;
+          const html = `
+            <strong>${props.location}</strong><br>
+            Hurricane: ${props.hurricane} (${props.year})<br>
+            Surf: ${props.surf}<br>
+            Notes: ${props.notes}<br>
+            <a href="${props.link}" target="_blank" rel="noopener noreferrer">View Surf Media</a>
           `;
-          L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
-            .addTo(map)
-            .bindPopup(popupContent);
+          new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(html)
+            .addTo(map);
+        });
+
+        map.on('mouseenter', 'surf-layer', () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', 'surf-layer', () => {
+          map.getCanvas().style.cursor = '';
         });
       });
+    });
   </script>
 </body>
 </html>
