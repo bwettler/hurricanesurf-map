@@ -2,25 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Hurricane Surf Map – Diagnostic</title>
+  <title>Hurricane Surf Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     html, body {
-      height: 100%;
-      width: 100%;
       margin: 0;
       padding: 0;
-      border: 0;
+      height: 100%;
+      width: 100%;
     }
     #map {
-      position: absolute;
-      top: 0;
-      left: 0;
       height: 100%;
       width: 100%;
-      margin: 0;
-      padding: 0;
     }
   </style>
 </head>
@@ -30,7 +24,9 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     const ICON_PATH = 'images/hurricane.svg';
-    const FIXED_ICON_SIZE = 24;
+    const FIXED_ICON_SIZE = 24; // px
+    const MAX_ZOOM = 8;
+    const MIN_ZOOM = 3;
 
     function createIcon() {
       return L.icon({
@@ -51,13 +47,13 @@
 
     Promise.all([
       preloadIcon(ICON_PATH),
-      fetch('surf-locations.json').then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
+      fetch('surf-locations.json').then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
       })
     ])
     .then(([_, data]) => {
-      const markers = data.map(loc => 
+      const markers = data.map(loc =>
         L.marker([loc.lat, loc.lng], { icon: createIcon() })
           .bindPopup(
             `<strong>${loc.location}</strong><br>` +
@@ -68,14 +64,25 @@
           )
       );
 
-      const map = L.map('map');
+      const map = L.map('map', {
+        minZoom: MIN_ZOOM,
+        maxZoom: MAX_ZOOM
+      });
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors',
         detectRetina: false
       }).addTo(map);
 
       const group = L.layerGroup(markers).addTo(map);
-      map.fitBounds(group.getBounds(), { padding: [20, 20] });
+      const bounds = group.getBounds();
+
+      if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
+      } else {
+        // Fallback center if no data
+        map.setView([30, -80], 5);
+      }
     })
     .catch(err => {
       console.error('❌ Initialization error:', err);
