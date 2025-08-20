@@ -52,7 +52,7 @@
   {
     "location": "Myrtle Beach, SC",
     "lat": 33.689,
-    "lng": -79.800,
+    "lng": -78.500,
     "hurricane": "Ian",
     "year": 2022,
     "surf": "6–10 ft",
@@ -122,7 +122,7 @@
   {
     "location": "Tybee Island, GA",
     "lat": 32.000,
-    "lng": -81.800,
+    "lng": -80.500,
     "hurricane": "Idalia",
     "year": 2023,
     "surf": "9–13 ft",
