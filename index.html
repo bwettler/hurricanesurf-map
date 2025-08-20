@@ -24,8 +24,13 @@
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    fetch('surf-locations.json')
-      .then(response => response.json())
+    fetch('https://raw.githubusercontent.com/bwettler/hurricanesurf-map/main/surf-locations.geojson')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
         data.forEach(loc => {
           const popupContent = `
@@ -37,6 +42,9 @@
           `;
           L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(popupContent);
         });
+      })
+      .catch(error => {
+        console.error('Error loading GeoJSON:', error);
       });
   </script>
 </body>
