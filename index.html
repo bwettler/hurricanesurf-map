@@ -26,15 +26,8 @@
 
     function createIcon(zoom) {
       const size = Math.max(16, zoom * 2);
-      const svg = `
-        <svg width="${size}" height="${size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="32" cy="32" r="30" fill="#0077be" stroke="#fff" stroke-width="4"/>
-          <path d="M32 12 C42 12, 52 22, 52 32 C52 42, 42 52, 32 52 C22 52, 12 42, 12 32 C12 22, 22 12, 32 12 Z" fill="#fff"/>
-        </svg>
-      `;
-      return L.divIcon({
-        html: svg,
-        className: '',
+      return L.icon({
+        iconUrl: 'image/hurricane.svg',
         iconSize: [size, size],
         iconAnchor: [size / 2, size / 2]
       });
