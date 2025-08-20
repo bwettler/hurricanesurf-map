@@ -88,8 +88,14 @@
         "hurricane": "Ian",
         "year": 2022,
         "surf": "6–10 ft",
-        "notes": "Waves breached\\n"
+        "notes": "Waves breached\\n",
+        "link": "",
+        "radius": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-78.880, 33.689]
+      }
+    }
+  ]
 }
-]
-}
-
