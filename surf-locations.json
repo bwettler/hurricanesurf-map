@@ -132,7 +132,7 @@
   {
     "location": "Fort Myers, FL",
     "lat": 26.640,
-    "lng": -82.000,
+    "lng": -83.000,
     "hurricane": "Charlie",
     "year": 2004,
     "surf": "10–14 ft",
@@ -152,7 +152,7 @@
   {
     "location": "Sanibel Island, FL",
     "lat": 26.448,
-    "lng": -82.000,
+    "lng": -83.000,
     "hurricane": "Ian",
     "year": 2022,
     "surf": "15–20 ft",
