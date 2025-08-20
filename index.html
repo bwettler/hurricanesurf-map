@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hurricane Surf Map</title>
-  <!-- Leaflet CSS must load before any script runs -->
+  <!-- Load Leaflet CSS before scripts -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     html, body {
@@ -25,31 +25,33 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Create map *after* DOM is ready
       const map = L.map('map');
 
-      // Add tiles
+      // Tile layer
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
 
-      // Fetch your GeoJSON or JSON data
       fetch('surf-locations.json')
         .then(res => res.json())
-        .then(data => {
-          // Assuming GeoJSON format:
-          const markers = L.geoJSON(data).addTo(map);
+        .then(locations => {
+          const latLngs = [];
 
-          // Once markers are on the map, fit bounds
-          const bounds = markers.getBounds();
-          if (bounds.isValid()) {
+          locations.forEach(loc => {
+            // Expecting: { "lat": number, "lon": number, "name": "..." }
+            const marker = L.marker([loc.lat, loc.lon])
+              .bindPopup(`<strong>${loc.name}</strong>`);
+            marker.addTo(map);
+            latLngs.push([loc.lat, loc.lon]);
+          });
+
+          if (latLngs.length) {
+            const bounds = L.latLngBounds(latLngs);
             map.fitBounds(bounds.pad(0.2));
           }
 
-          // Kick Leaflet to recalc size now that everything’s visible
-          setTimeout(() => {
-            map.invalidateSize();
-          }, 0);
+          // Let Leaflet recalc size/layout after rendering
+          setTimeout(() => map.invalidateSize(), 0);
         })
         .catch(err => console.error('Error loading locations:', err));
     });
