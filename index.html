@@ -24,13 +24,6 @@
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    const hurricaneIcon = L.icon({
-      iconUrl: 'images/hurricane.svg',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16],
-      popupAnchor: [0, -16]
-    });
-
     fetch('surf-locations.json')
       .then(response => response.json())
       .then(data => {
@@ -42,9 +35,7 @@
             Notes: ${loc.notes}<br>
             <a href="${loc.link}" target="_blank" rel="noopener noreferrer">View Surf Media</a>
           `;
-          L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
-            .addTo(map)
-            .bindPopup(popupContent);
+          L.marker([loc.lat, loc.lng]).addTo(map).bindPopup(popupContent);
         });
       });
   </script>
