@@ -2,7 +2,7 @@
   {
     "location": "Ventura Beach, CA",
     "lat": 34.275,
-    "lng": -118.000,
+    "lng": -120.000,
     "hurricane": "Hilary",
     "year": 2023,
     "surf": "10–15 ft",
@@ -22,7 +22,7 @@
   {
     "location": "Florida Panhandle",
     "lat": 30.000,
-    "lng": -84.000,
+    "lng": -86.800,
     "hurricane": "Michael",
     "year": 2018,
     "surf": "20+ ft surge",
@@ -52,7 +52,7 @@
   {
     "location": "Myrtle Beach, SC",
     "lat": 33.689,
-    "lng": -78.000,
+    "lng": -79.800,
     "hurricane": "Ian",
     "year": 2022,
     "surf": "6–10 ft",
@@ -72,7 +72,7 @@
   {
     "location": "St. Pete Beach, FL",
     "lat": 27.725,
-    "lng": -81.800,
+    "lng": -83.800,
     "hurricane": "Helene",
     "year": 2024,
     "surf": "~6 ft",
@@ -112,7 +112,7 @@
   {
     "location": "Santa Cruz, CA",
     "lat": 36.951,
-    "lng": -121.000,
+    "lng": -123.000,
     "hurricane": "Kay",
     "year": 2022,
     "surf": "5–8 ft",
@@ -122,7 +122,7 @@
   {
     "location": "Tybee Island, GA",
     "lat": 32.000,
-    "lng": -79.800,
+    "lng": -81.800,
     "hurricane": "Idalia",
     "year": 2023,
     "surf": "9–13 ft",
