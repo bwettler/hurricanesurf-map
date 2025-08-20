@@ -6,9 +6,22 @@
   <title>Hurricane Surf Map</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
     #map {
       height: 600px;
       width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -24,41 +37,241 @@
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
+    // Embedded SVG as data URL
+    const hurricaneSvg = `data:image/svg+xml;base64,${btoa(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+        <path d="M32,32 
+                 L34,32 
+                 A2,1.5 0 0,1 32,33.5
+                 A4,3 0 0,1 28,32
+                 A6,4.5 0 0,1 32,27.5
+                 A8,6 0 0,1 40,32
+                 A10,7.5 0 0,1 32,39.5
+                 A12,9 0 0,1 20,32
+                 A14,10.5 0 0,1 32,21.5
+                 A16,12 0 0,1 48,32
+                 A18,13.5 0 0,1 32,45.5
+                 A20,15 0 0,1 12,32
+                 A22,16.5 0 0,1 32,15.5" 
+              stroke="black" stroke-width="1" fill="none" stroke-linecap="round" stroke-dasharray="15.75,5.25,5.25,5.25"/>
+        <circle cx="32" cy="32" r="2" stroke="black" stroke-width="0.8" fill="none"/>
+      </svg>
+    `)}`;
+
     function createIcon(zoom) {
       const size = Math.max(16, zoom * 2);
       return L.icon({
-        iconUrl: 'image/hurricane.svg',
+        iconUrl: hurricaneSvg,
         iconSize: [size, size],
-        iconAnchor: [size / 2, size / 2]
+        iconAnchor: [size / 2, size / 2],
+        popupAnchor: [0, -size / 2]
       });
     }
 
     let markers = [];
 
-    fetch('surf-locations.json')
-      .then(response => response.json())
-      .then(data => {
-        data.forEach(loc => {
-          const marker = L.marker([loc.lat, loc.lng], {
-            icon: createIcon(map.getZoom())
-          }).bindPopup(`
-            <strong>${loc.location}</strong><br>
-            Hurricane: ${loc.hurricane} (${loc.year})<br>
-            Surf: ${loc.surf}<br>
-            Notes: ${loc.notes}<br>
-            <a href="${loc.link}" target="_blank" rel="noopener noreferrer">View Surf Media</a>
-          `).addTo(map);
-          markers.push(marker);
-        });
-      });
+    // Hurricane surf location data (embedded to avoid loading issues)
+    const surfLocations = [
+      {
+        "location": "Ventura Beach, CA",
+        "lat": 34.275,
+        "lng": -120.000,
+        "hurricane": "Hilary",
+        "year": 2023,
+        "surf": "10–15 ft",
+        "notes": "Flooding and injuries from rogue waves",
+        "link": "https://www.surfline.com/surf-news/swell-alert/tracking-major-hurricane-hilary/185309"
+      },
+      {
+        "location": "South County, RI",
+        "lat": 41.450,
+        "lng": -70.000,
+        "hurricane": "Fiona",
+        "year": 2022,
+        "surf": "10 ft",
+        "notes": "Waves damaged infrastructure and closed beaches",
+        "link": "https://www.abc6.com/effects-of-hurricane-fiona-sends-10-foot-waves-to-south-county/"
+      },
+      {
+        "location": "Florida Panhandle",
+        "lat": 30.000,
+        "lng": -86.800,
+        "hurricane": "Michael",
+        "year": 2018,
+        "surf": "20+ ft surge",
+        "notes": "Category 5 storm; extreme coastal flooding",
+        "link": "https://www.naplesnews.com/story/news/local/environment/2018/10/10/hurricane-michael-brings-high-waves-possible-beach-erosion-collier-florida/1589434002/"
+      },
+      {
+        "location": "Long Island, NY",
+        "lat": 40.789,
+        "lng": -72.000,
+        "hurricane": "Lee",
+        "year": 2023,
+        "surf": "6–10 ft",
+        "notes": "Rip currents and beach closures",
+        "link": "https://www.youtube.com/watch?v=nasrzUgqZQg"
+      },
+      {
+        "location": "New Jersey Shore",
+        "lat": 39.650,
+        "lng": -73.000,
+        "hurricane": "Larry",
+        "year": 2021,
+        "surf": "8–12 ft",
+        "notes": "Surfing conditions and coastal erosion",
+        "link": "https://www.urnsurfco.com/hurricane-larry-new-jersey/"
+      },
+      {
+        "location": "Myrtle Beach, SC",
+        "lat": 33.689,
+        "lng": -78.500,
+        "hurricane": "Ian",
+        "year": 2022,
+        "surf": "6–10 ft",
+        "notes": "Waves breached sea walls and flooded streets",
+        "link": "https://www.live5news.com/2022/10/02/video-shows-hurricane-ian-slamming-myrtle-beach-state-park-pier-during-height-storm/"
+      },
+      {
+        "location": "Seacoast, NH",
+        "lat": 43.071,
+        "lng": -69.500,
+        "hurricane": "Teddy",
+        "year": 2020,
+        "surf": "8–10 ft",
+        "notes": "Surfers reported excellent conditions amid warnings",
+        "link": "https://www.seacoastonline.com/story/news/2020/09/23/surfers-delight-hurricane-teddy-brings-big-waves-to-seacoast/42683481/"
+      },
+      {
+        "location": "St. Pete Beach, FL",
+        "lat": 27.725,
+        "lng": -83.800,
+        "hurricane": "Helene",
+        "year": 2024,
+        "surf": "~6 ft",
+        "notes": "Storm waves crashed on shore; beach erosion reported",
+        "link": "https://www.rnz.co.nz/news/world/529252/in-pictures-hurricane-helene-batters-florida"
+      },
+      {
+        "location": "Galveston, TX",
+        "lat": 29.301,
+        "lng": -93.300,
+        "hurricane": "Harvey",
+        "year": 2017,
+        "surf": "12–18 ft",
+        "notes": "Massive flooding and storm surge",
+        "link": "https://www.nbcnews.com/slideshow/news/photos-hurricane-harvey-slams-texas-n796226"
+      },
+      {
+        "location": "Outer Banks, NC",
+        "lat": 35.558,
+        "lng": -74.000,
+        "hurricane": "Dorian",
+        "year": 2019,
+        "surf": "10–14 ft",
+        "notes": "Beach erosion and evacuations",
+        "link": "https://www.wral.com/hurricane-dorian-brings-heavy-rain-strong-winds-to-nc-coast/18616569/"
+      },
+      {
+        "location": "Cape Cod, MA",
+        "lat": 41.668,
+        "lng": -69.000,
+        "hurricane": "Henri",
+        "year": 2021,
+        "surf": "7–11 ft",
+        "notes": "Strong surf and coastal flooding",
+        "link": "https://www.capecodtimes.com/story/news/2021/08/22/hurricane-henri-brings-heavy-rain-strong-winds-coastal-flooding-cape-cod/8238828002/"
+      },
+      {
+        "location": "Santa Cruz, CA",
+        "lat": 36.951,
+        "lng": -123.000,
+        "hurricane": "Kay",
+        "year": 2022,
+        "surf": "5–8 ft",
+        "notes": "Unusual Pacific swell; minor flooding",
+        "link": "https://www.surfline.com/surf-news/hurricane-kay-brings-rare-south-swell-to-california/157839"
+      },
+      {
+        "location": "Tybee Island, GA",
+        "lat": 32.000,
+        "lng": -80.500,
+        "hurricane": "Idalia",
+        "year": 2023,
+        "surf": "9–13 ft",
+        "notes": "Storm surge flooded low-lying areas",
+        "link": "https://www.savannahnow.com/story/news/2023/08/30/hurricane-idalia-tybee-island-georgia-storm-surge-flooding/70752694007/"
+      },
+      {
+        "location": "Fort Myers, FL",
+        "lat": 26.640,
+        "lng": -83.000,
+        "hurricane": "Charlie",
+        "year": 2004,
+        "surf": "10–14 ft",
+        "notes": "Category 4 landfall; major coastal damage",
+        "link": "https://www.nhc.noaa.gov/archive/2004/CHARLEY.shtml"
+      },
+      {
+        "location": "Naples, FL",
+        "lat": 26.142,
+        "lng": -82.000,
+        "hurricane": "Irma",
+        "year": 2017,
+        "surf": "12–16 ft",
+        "notes": "Historic storm surge and flooding",
+        "link": "https://www.naplesnews.com/story/news/local/2017/09/10/hurricane-irma-hits-naples-florida/651156001/"
+      },
+      {
+        "location": "Sanibel Island, FL",
+        "lat": 26.448,
+        "lng": -83.000,
+        "hurricane": "Ian",
+        "year": 2022,
+        "surf": "15–20 ft",
+        "notes": "Devastating surge; bridge destroyed",
+        "link": "https://www.nytimes.com/2022/09/29/us/hurricane-ian-sanibel-island.html"
+      },
+      {
+        "location": "Clearwater Beach, FL",
+        "lat": 27.977,
+        "lng": -83.800,
+        "hurricane": "Milton",
+        "year": 2024,
+        "surf": "8–12 ft",
+        "notes": "Strong swell and beach erosion",
+        "link": "https://www.noaa.gov/news/hurricane-milton-2024"
+      }
+    ];
 
+    // Add markers to map
+    surfLocations.forEach(loc => {
+      const marker = L.marker([loc.lat, loc.lng], {
+        icon: createIcon(map.getZoom())
+      }).bindPopup(`
+        <div style="min-width: 200px;">
+          <strong style="color: #2c3e50; font-size: 14px;">${loc.location}</strong><br>
+          <strong>Hurricane:</strong> ${loc.hurricane} (${loc.year})<br>
+          <strong>Surf:</strong> ${loc.surf}<br>
+          <strong>Notes:</strong> ${loc.notes}<br>
+          <a href="${loc.link}" target="_blank" rel="noopener noreferrer" style="color: #3498db;">View Surf Media</a>
+        </div>
+      `).addTo(map);
+      markers.push(marker);
+    });
+
+    // Update icon size on zoom
     map.on('zoomend', () => {
       const newZoom = map.getZoom();
       markers.forEach(marker => {
         const popup = marker.getPopup();
+        const isOpen = popup && popup.isOpen();
+        const content = popup ? popup.getContent() : null;
+        
         marker.setIcon(createIcon(newZoom));
-        if (popup && popup.isOpen()) {
-          marker.bindPopup(popup.getContent());
+        
+        if (isOpen && content) {
+          marker.bindPopup(content).openPopup();
         }
       });
     });
