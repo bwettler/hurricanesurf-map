@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Hurricane Surf Map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     #map {
@@ -24,22 +24,21 @@
     }).addTo(map);
 
     const ICON_PATH = 'images/hurricane.svg';
+    const FIXED_ICON_SIZE = 24; // px
 
-    function createIcon(zoom) {
-      const size = Math.max(16, zoom * 2);
+    function createIcon() {
       return L.icon({
         iconUrl: ICON_PATH,
-        iconSize: [size, size],
-        iconAnchor: [size / 2, size / 2]
+        iconSize: [FIXED_ICON_SIZE, FIXED_ICON_SIZE],
+        iconAnchor: [FIXED_ICON_SIZE / 2, FIXED_ICON_SIZE / 2]
       });
     }
 
-    // Preload the SVG before creating markers
     function preloadIcon(src) {
       return new Promise((resolve, reject) => {
         const img = new Image();
         img.onload = () => resolve(src);
-        img.onerror = (e) => reject(new Error(`Icon failed to load: ${src}`));
+        img.onerror = () => reject(new Error(`Icon failed to load: ${src}`));
         img.src = src;
       });
     }
@@ -58,21 +57,16 @@
 
       data.forEach(loc => {
         const marker = L.marker([loc.lat, loc.lng], {
-          icon: createIcon(map.getZoom())
-        }).bindPopup(`<strong>${loc.location}</strong><br>${loc.description || ''}`)
-          .addTo(map);
-        markers.push(marker);
-      });
+          icon: createIcon()
+        }).bindPopup(
+          `<strong>${loc.location}</strong><br>` +
+          `${loc.hurricane} (${loc.year})<br>` +
+          `${loc.surf || ''}<br>` +
+          `${loc.notes || ''}<br>` +
+          `<a href="${loc.link}" target="_blank">More info</a>`
+        ).addTo(map);
 
-      map.on('zoomend', () => {
-        const newZoom = map.getZoom();
-        markers.forEach(marker => {
-          const popup = marker.getPopup();
-          marker.setIcon(createIcon(newZoom));
-          if (popup && popup.isOpen()) {
-            marker.bindPopup(popup.getContent());
-          }
-        });
+        markers.push(marker);
       });
     })
     .catch(err => {
