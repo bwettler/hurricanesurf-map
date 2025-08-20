@@ -74,7 +74,7 @@
         detectRetina: false
       }).addTo(map);
 
-      const group = L.layerGroup(markers).addTo(map);
+      const group = L.featureGroup(markers).addTo(map);
       const bounds = group.getBounds();
 
       if (bounds.isValid()) {
