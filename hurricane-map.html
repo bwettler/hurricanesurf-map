@@ -31,9 +31,21 @@
   .hurricane-marker img {
     animation: spin 2s linear infinite;
     transform-origin: center center;
-    width: 64px;
-    height: 64px;
-    display: block;
+    width: 64px !important;
+    height: 64px !important;
+    display: block !important;
+    border: 2px solid red; /* Debug border to see if img exists */
+  }
+  /* Fallback if SVG doesn't load */
+  .hurricane-marker::before {
+    content: "🌀";
+    font-size: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 2s linear infinite;
+    z-index: -1;
   }
 </style>
 </head>
@@ -45,13 +57,15 @@
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
   
-  // Use divIcon with simpler structure
+  // Use divIcon with error handling
   const hurricaneIcon = L.divIcon({
-    html: `<img src="images/hurricane.svg" width="${ICON_SIZE}" height="${ICON_SIZE}">`,
+    html: `<img src="images/hurricane.svg" width="${ICON_SIZE}" height="${ICON_SIZE}" 
+           onerror="console.log('SVG failed to load'); this.style.display='none';"
+           onload="console.log('SVG loaded successfully');">`,
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
     popupAnchor: [0, -ICON_SIZE / 2],
-    className: 'hurricane-marker' // our custom class
+    className: 'hurricane-marker'
   });
   
   const map = L.map('map', {
@@ -69,6 +83,8 @@
       return r.json();
     })
     .then(data => {
+      console.log('Data loaded:', data.length, 'locations');
+      
       const markers = data.map(loc =>
         L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
           .bindPopup(
@@ -88,6 +104,8 @@
       } else {
         map.setView([30, -80], 5);
       }
+      
+      console.log('Markers created:', markers.length);
     })
     .catch(err => {
       console.error('Initialization error:', err);
