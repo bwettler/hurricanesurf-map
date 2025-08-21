@@ -21,31 +21,10 @@
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-  /* Style for the spinning hurricane icon */
-  .hurricane-marker {
-    background: none !important;
-    border: none !important;
-    width: 64px !important;
-    height: 64px !important;
-  }
-  .hurricane-marker img {
-    animation: spin 2s linear infinite;
-    transform-origin: center center;
-    width: 64px !important;
-    height: 64px !important;
-    display: block !important;
-    border: 2px solid red; /* Debug border to see if img exists */
-  }
-  /* Fallback if SVG doesn't load */
-  .hurricane-marker::before {
-    content: "🌀";
-    font-size: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: spin 2s linear infinite;
-    z-index: -1;
+  /* Target the actual Leaflet marker images */
+  .leaflet-marker-icon[src*="hurricane.svg"] {
+    animation: spin 2s linear infinite !important;
+    transform-origin: center center !important;
   }
 </style>
 </head>
@@ -57,15 +36,12 @@
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
   
-  // Use divIcon with error handling
-  const hurricaneIcon = L.divIcon({
-    html: `<img src="images/hurricane.svg" width="${ICON_SIZE}" height="${ICON_SIZE}" 
-           onerror="console.log('SVG failed to load'); this.style.display='none';"
-           onload="console.log('SVG loaded successfully');">`,
+  // Use regular L.icon instead of divIcon
+  const hurricaneIcon = L.icon({
+    iconUrl: 'images/hurricane.svg',
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
-    popupAnchor: [0, -ICON_SIZE / 2],
-    className: 'hurricane-marker'
+    popupAnchor: [0, -ICON_SIZE / 2]
   });
   
   const map = L.map('map', {
@@ -83,8 +59,6 @@
       return r.json();
     })
     .then(data => {
-      console.log('Data loaded:', data.length, 'locations');
-      
       const markers = data.map(loc =>
         L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
           .bindPopup(
@@ -104,8 +78,6 @@
       } else {
         map.setView([30, -80], 5);
       }
-      
-      console.log('Markers created:', markers.length);
     })
     .catch(err => {
       console.error('Initialization error:', err);
