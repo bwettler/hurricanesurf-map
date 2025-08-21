@@ -24,7 +24,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script>
     const ICON_PATH = 'images/hurricane.svg';
-    const FIXED_ICON_SIZE = 96; // px (increased from 24 to 96 - 4x larger)
+    const FIXED_ICON_SIZE = 480; // px (increased from 96 to 480 - 5x larger)
     const MAX_ZOOM = 8;
     const MIN_ZOOM = 3;
 
