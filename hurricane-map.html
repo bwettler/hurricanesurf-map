@@ -18,17 +18,18 @@
   }
   /* Spin animation */
   @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
-  /* Target the actual Leaflet marker images - use animation instead of transform */
+  /* Use CSS transform functions that can combine with Leaflet's positioning */
   .leaflet-marker-icon[src*="hurricane.svg"] {
     animation: spin 2s linear infinite !important;
+    transform-origin: 50% 50% !important;
   }
-  /* Alternative approach - force the animation */
-  img[src*="hurricane.svg"] {
+  /* Force animation on all hurricane images */
+  img[src*="hurricane.svg"].leaflet-marker-icon {
     animation: spin 2s linear infinite !important;
-    animation-fill-mode: both !important;
+    transform-origin: center !important;
   }
 </style>
 </head>
