@@ -2,66 +2,78 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Hurricane Map</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
+<title>Hurricane Surf Map</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" rel="stylesheet"/>
 <style>
-  #map {
-    height: 100vh;
-    width: 100%;
-  }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
 </style>
 </head>
 <body>
 <div id="map"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-  // 🔹 Change this ONE number to adjust all marker sizes
-  const ICON_SIZE = 64; // pixels
+    const MAX_ZOOM = 8;
+    const MIN_ZOOM = 3;
 
-  const MAX_ZOOM = 8;
-  const MIN_ZOOM = 3;
-
-  // Single, fixed-size hurricane icon using ICON_SIZE
-  const hurricaneIcon = L.icon({
-    iconUrl: 'images/hurricane.svg',
-    iconSize: [ICON_SIZE, ICON_SIZE],
-    iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
-    popupAnchor: [0, -ICON_SIZE / 2]
-  });
-
-  const map = L.map('map', {
-    minZoom: MIN_ZOOM,
-    maxZoom: MAX_ZOOM
-  }).setView([25.0, -80.0], 6);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
-
-  // Example marker
-  L.marker([25.0, -80.0], { icon: hurricaneIcon })
-    .bindPopup('Hurricane Surf Zone')
-    .addTo(map);
-
-  // Example: loading from JSON
-  /*
-  fetch('surf-locations.json')
-    .then(r => r.json())
-    .then(data => {
-      data.forEach(loc => {
-        L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
-          .bindPopup(
-            `<strong>${loc.location}</strong><br>` +
-            `${loc.hurricane} (${loc.year})<br>` +
-            `${loc.surf || ''}<br>` +
-            `${loc.notes || ''}<br>` +
-            `<a href="${loc.link}" target="_blank">More info</a>`
-          )
-          .addTo(map);
-      });
+    // Define hurricane icon
+    var hurricaneIcon = L.icon({
+        iconUrl: 'images/hurricane.svg', // path includes images/ folder
+        iconSize: [64, 64],              // fixed display size
+        iconAnchor: [32, 32],            // center the icon on its lat/lng
+        popupAnchor: [0, -32]            // shift popup above the icon
     });
-  */
+
+    fetch('surf-locations.json')
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then(data => {
+        const markers = data.map(loc =>
+          L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
+            .bindPopup(
+              `<strong>${loc.location}</strong><br>` +
+              `${loc.hurricane} (${loc.year})<br>` +
+              `${loc.surf || ''}<br>` +
+              `${loc.notes || ''}<br>` +
+              `<a href="${loc.link}" target="_blank">More info</a>`
+            )
+        );
+
+        const map = L.map('map', {
+          minZoom: MIN_ZOOM,
+          maxZoom: MAX_ZOOM
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors',
+          detectRetina: false
+        }).addTo(map);
+
+        const group = L.featureGroup(markers).addTo(map);
+        const bounds = group.getBounds();
+
+        if (bounds.isValid()) {
+          map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
+        } else {
+          // Fallback center if no data
+          map.setView([30, -80], 5);
+        }
+      })
+      .catch(err => {
+        console.error('Initialization error:', err);
+        alert('Error initializing map assets.');
+      });
 </script>
 </body>
 </html>
