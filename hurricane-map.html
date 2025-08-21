@@ -23,16 +23,13 @@
     to { transform: rotate(360deg); }
   }
 
-  .spin-wrapper {
+  /* Inner wrapper spins, Leaflet moves the outer container */
+  .spin-inner {
+    animation: spin 20s linear infinite;
+    transform-origin: center center;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: spin 20s linear infinite; /* adjust speed here */
-    transform-origin: center center;
-  }
-
-  .spin-wrapper img {
-    display: block;
   }
 </style>
 </head>
@@ -44,15 +41,15 @@
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
 
-  // Hurricane icon as a divIcon with inner wrapper for animation
+  // Use divIcon with nested inner div for rotation
   const hurricaneIcon = L.divIcon({
-    html: `<div class="spin-wrapper">
+    html: `<div class="spin-inner">
              <img src="images/hurricane.svg" width="${ICON_SIZE}" height="${ICON_SIZE}">
            </div>`,
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
     popupAnchor: [0, -ICON_SIZE / 2],
-    className: '' // prevent Leaflet from adding default styles
+    className: '' // no default Leaflet styles
   });
 
   const map = L.map('map', {
