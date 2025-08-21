@@ -23,8 +23,8 @@
     to { transform: rotate(360deg); }
   }
 
-  /* Apply spin to the marker image */
-  .spin-icon img {
+  /* Apply spin to the entire marker container */
+  .spin-icon {
     animation: spin 20s linear infinite; /* adjust speed here */
     transform-origin: center center;
   }
@@ -44,7 +44,7 @@
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
     popupAnchor: [0, -ICON_SIZE / 2],
-    className: 'spin-icon' // 🔹 attach CSS animation
+    className: 'spin-icon' // 🔹 attach CSS animation to container
   });
 
   const map = L.map('map', {
