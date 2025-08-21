@@ -16,38 +16,46 @@
     height: 100%;
     width: 100%;
   }
+
+  /* 🔹 Spin animation */
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Apply spin to the marker image */
+  .spin-icon img {
+    animation: spin 20s linear infinite; /* adjust speed here */
+    transform-origin: center center;
+  }
 </style>
 </head>
 <body>
 <div id="map"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-  // 🔹 Change this ONE number to adjust all marker sizes
   const ICON_SIZE = 64; // pixels
-
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
 
-  // Hurricane icon definition
+  // Hurricane icon with spinning class
   const hurricaneIcon = L.icon({
     iconUrl: 'images/hurricane.svg',
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
-    popupAnchor: [0, -ICON_SIZE / 2]
+    popupAnchor: [0, -ICON_SIZE / 2],
+    className: 'spin-icon' // 🔹 attach CSS animation
   });
 
-  // Initialize map (no fixed center yet)
   const map = L.map('map', {
     minZoom: MIN_ZOOM,
     maxZoom: MAX_ZOOM
   });
 
-  // Base layer
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Load markers from JSON and fit bounds
   fetch('surf-locations.json')
     .then(r => {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -71,13 +79,13 @@
       if (bounds.isValid()) {
         map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
       } else {
-        map.setView([30, -80], 5); // fallback center
+        map.setView([30, -80], 5);
       }
     })
     .catch(err => {
       console.error('Initialization error:', err);
       alert('Error initializing map assets.');
-      map.setView([30, -80], 5); // fallback if fetch fails
+      map.setView([30, -80], 5);
     });
 </script>
 </body>
