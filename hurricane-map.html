@@ -16,20 +16,23 @@
     height: 100%;
     width: 100%;
   }
-  /* Spin animation */
+  
+  /* Spin animation keyframes */
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  /* Use CSS transform functions that can combine with Leaflet's positioning */
-  .leaflet-marker-icon[src*="hurricane.svg"] {
-    animation: spin 2s linear infinite !important;
-    transform-origin: 50% 50% !important;
+  
+  /* Target the hurricane marker images specifically */
+  .leaflet-marker-icon.hurricane-marker {
+    animation: spin 2s linear infinite;
+    transform-origin: center center;
   }
-  /* Force animation on all hurricane images */
-  img[src*="hurricane.svg"].leaflet-marker-icon {
-    animation: spin 2s linear infinite !important;
-    transform-origin: center !important;
+  
+  /* Alternative approach - target by src attribute */
+  img.leaflet-marker-icon[src*="hurricane"] {
+    animation: spin 2s linear infinite;
+    transform-origin: center center;
   }
 </style>
 </head>
@@ -41,12 +44,13 @@
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
   
-  // Use regular L.icon instead of divIcon
+  // Create hurricane icon with custom className for CSS targeting
   const hurricaneIcon = L.icon({
-    iconUrl: 'images/hurricane.svg',
+    iconUrl: 'https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/arrow-path.svg', // Using a placeholder spinning icon
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
-    popupAnchor: [0, -ICON_SIZE / 2]
+    popupAnchor: [0, -ICON_SIZE / 2],
+    className: 'hurricane-marker' // This is key - adds CSS class to the marker
   });
   
   const map = L.map('map', {
@@ -58,37 +62,48 @@
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
   
+  // Sample data for demonstration since we don't have the JSON file
+  const sampleData = [
+    { lat: 25.7617, lng: -80.1918, location: "Miami", hurricane: "Andrew", year: "1992", surf: "15-20ft", notes: "Category 5", link: "#" },
+    { lat: 26.1224, lng: -80.1373, location: "Fort Lauderdale", hurricane: "Wilma", year: "2005", surf: "12-18ft", notes: "Category 3", link: "#" },
+    { lat: 24.5551, lng: -81.7800, location: "Key West", hurricane: "Irma", year: "2017", surf: "10-15ft", notes: "Category 4", link: "#" },
+    { lat: 27.7663, lng: -82.6404, location: "Tampa", hurricane: "Charley", year: "2004", surf: "8-12ft", notes: "Category 4", link: "#" },
+    { lat: 30.4383, lng: -84.2807, location: "Tallahassee", hurricane: "Hermine", year: "2016", surf: "6-10ft", notes: "Category 1", link: "#" }
+  ];
+  
+  // Try to fetch the actual data, fall back to sample data
   fetch('surf-locations.json')
     .then(r => {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return r.json();
     })
-    .then(data => {
-      const markers = data.map(loc =>
-        L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
-          .bindPopup(
-            `<strong>${loc.location}</strong><br>` +
-            `${loc.hurricane} (${loc.year})<br>` +
-            `${loc.surf || ''}<br>` +
-            `${loc.notes || ''}<br>` +
-            `<a href="${loc.link}" target="_blank">More info</a>`
-          )
-      );
-      
-      const group = L.featureGroup(markers).addTo(map);
-      const bounds = group.getBounds();
-      
-      if (bounds.isValid()) {
-        map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
-      } else {
-        map.setView([30, -80], 5);
-      }
-    })
+    .then(data => createMarkers(data))
     .catch(err => {
-      console.error('Initialization error:', err);
-      alert('Error initializing map assets.');
-      map.setView([30, -80], 5);
+      console.warn('Could not load surf-locations.json, using sample data:', err);
+      createMarkers(sampleData);
     });
+  
+  function createMarkers(data) {
+    const markers = data.map(loc =>
+      L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
+        .bindPopup(
+          `<strong>${loc.location}</strong><br>` +
+          `${loc.hurricane} (${loc.year})<br>` +
+          `${loc.surf || 'N/A'}<br>` +
+          `${loc.notes || ''}<br>` +
+          `<a href="${loc.link}" target="_blank">More info</a>`
+        )
+    );
+    
+    const group = L.featureGroup(markers).addTo(map);
+    const bounds = group.getBounds();
+    
+    if (bounds.isValid()) {
+      map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
+    } else {
+      map.setView([30, -80], 5);
+    }
+  }
 </script>
 </body>
 </html>
