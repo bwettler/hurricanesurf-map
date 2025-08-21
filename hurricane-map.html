@@ -21,10 +21,14 @@
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-  /* Target the actual Leaflet marker images */
+  /* Target the actual Leaflet marker images - use animation instead of transform */
   .leaflet-marker-icon[src*="hurricane.svg"] {
     animation: spin 2s linear infinite !important;
-    transform-origin: center center !important;
+  }
+  /* Alternative approach - force the animation */
+  img[src*="hurricane.svg"] {
+    animation: spin 2s linear infinite !important;
+    animation-fill-mode: both !important;
   }
 </style>
 </head>
