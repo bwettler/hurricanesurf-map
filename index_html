@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hurricane Surf Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+    const ICON_PATH = 'images/hurricane.svg';
+    const FIXED_ICON_SIZE = 96; // px (increased from 24 to 96 - 4x larger)
+    const MAX_ZOOM = 8;
+    const MIN_ZOOM = 3;
+
+    function createIcon() {
+      return L.icon({
+        iconUrl: ICON_PATH,
+        iconSize: [FIXED_ICON_SIZE, FIXED_ICON_SIZE],
+        iconAnchor: [FIXED_ICON_SIZE / 2, FIXED_ICON_SIZE / 2]
+      });
+    }
+
+    function preloadIcon(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(src);
+        img.onerror = () => reject(new Error(`Icon failed to load: ${src}`));
+        img.src = src;
+      });
+    }
+
+    Promise.all([
+      preloadIcon(ICON_PATH),
+      fetch('surf-locations.json').then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+    ])
+    .then(([_, data]) => {
+      const markers = data.map(loc =>
+        L.marker([loc.lat, loc.lng], { icon: createIcon() })
+          .bindPopup(
+            `<strong>${loc.location}</strong><br>` +
+            `${loc.hurricane} (${loc.year})<br>` +
+            `${loc.surf || ''}<br>` +
+            `${loc.notes || ''}<br>` +
+            `<a href="${loc.link}" target="_blank">More info</a>`
+          )
+      );
+
+      const map = L.map('map', {
+        minZoom: MIN_ZOOM,
+        maxZoom: MAX_ZOOM
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        detectRetina: false
+      }).addTo(map);
+
+      const group = L.featureGroup(markers).addTo(map);
+      const bounds = group.getBounds();
+
+      if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
+      } else {
+        // Fallback center if no data
+        map.setView([30, -80], 5);
+      }
+    })
+    .catch(err => {
+      console.error('Initialization error:', err);
+      alert('Error initializing map assets.');
+    });
+  </script>
+</body>
+</html>
