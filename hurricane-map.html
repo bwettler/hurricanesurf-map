@@ -23,16 +23,27 @@
     100% { transform: rotate(360deg); }
   }
   
-  /* Target hurricane markers by src attribute - this will work! */
-  .leaflet-marker-icon[src*="hurricane.svg"] {
+  /* Ultra-aggressive CSS that will override everything */
+  .leaflet-marker-icon[src*="hurricane"] {
     animation: spin 2s linear infinite !important;
-    transform-origin: center center !important;
+    transform-origin: 50% 50% !important;
   }
   
-  /* Backup selector for any hurricane images */
-  img[src*="hurricane.svg"] {
+  img[src*="hurricane"] {
     animation: spin 2s linear infinite !important;
-    transform-origin: center center !important;
+    transform-origin: 50% 50% !important;
+  }
+  
+  /* Even more specific selectors */
+  .leaflet-marker-pane img[src*="hurricane"] {
+    animation: spin 2s linear infinite !important;
+    transform-origin: center !important;
+  }
+  
+  /* Target all hurricane images by any means necessary */
+  img.leaflet-marker-icon.leaflet-zoom-animated[src*="hurricane"] {
+    animation: spin 2s linear infinite !important;
+    transform-origin: center !important;
   }
 </style>
 </head>
@@ -44,9 +55,9 @@
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
   
-  // Use your original hurricane icon (remove the className since the CSS targets by src)
+  // Create hurricane icon
   const hurricaneIcon = L.icon({
-    iconUrl: 'images/hurricane.svg', // Your original path
+    iconUrl: 'images/hurricane.svg',
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
     popupAnchor: [0, -ICON_SIZE / 2]
@@ -61,7 +72,7 @@
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
   
-  // Sample data for demonstration since we don't have the JSON file
+  // Sample data for demonstration
   const sampleData = [
     { lat: 25.7617, lng: -80.1918, location: "Miami", hurricane: "Andrew", year: "1992", surf: "15-20ft", notes: "Category 5", link: "#" },
     { lat: 26.1224, lng: -80.1373, location: "Fort Lauderdale", hurricane: "Wilma", year: "2005", surf: "12-18ft", notes: "Category 3", link: "#" },
@@ -95,6 +106,25 @@
     );
     
     const group = L.featureGroup(markers).addTo(map);
+    
+    // JAVASCRIPT FALLBACK - Force animation if CSS fails
+    setTimeout(() => {
+      const hurricaneImages = document.querySelectorAll('img[src*="hurricane"]');
+      console.log('Found', hurricaneImages.length, 'hurricane images');
+      
+      hurricaneImages.forEach((img, index) => {
+        console.log(`Applying animation to hurricane ${index + 1}`);
+        img.style.animation = 'spin 2s linear infinite';
+        img.style.transformOrigin = 'center';
+        
+        // Double-check animation is applied
+        setTimeout(() => {
+          const computedStyle = window.getComputedStyle(img);
+          console.log(`Hurricane ${index + 1} animation:`, computedStyle.animation);
+        }, 100);
+      });
+    }, 1000); // Wait 1 second for images to load
+    
     const bounds = group.getBounds();
     
     if (bounds.isValid()) {
