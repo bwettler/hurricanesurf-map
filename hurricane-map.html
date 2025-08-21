@@ -17,16 +17,22 @@
     width: 100%;
   }
 
-  /* 🔹 Spin animation */
+  /* Spin animation */
   @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
 
-  /* Apply spin to the entire marker container */
-  .spin-icon {
+  .spin-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     animation: spin 20s linear infinite; /* adjust speed here */
     transform-origin: center center;
+  }
+
+  .spin-wrapper img {
+    display: block;
   }
 </style>
 </head>
@@ -38,13 +44,15 @@
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
 
-  // Hurricane icon with spinning class
-  const hurricaneIcon = L.icon({
-    iconUrl: 'images/hurricane.svg',
+  // Hurricane icon as a divIcon with inner wrapper for animation
+  const hurricaneIcon = L.divIcon({
+    html: `<div class="spin-wrapper">
+             <img src="images/hurricane.svg" width="${ICON_SIZE}" height="${ICON_SIZE}">
+           </div>`,
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
     popupAnchor: [0, -ICON_SIZE / 2],
-    className: 'spin-icon' // 🔹 attach CSS animation to container
+    className: '' // prevent Leaflet from adding default styles
   });
 
   const map = L.map('map', {
