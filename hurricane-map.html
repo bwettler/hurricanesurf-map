@@ -16,20 +16,24 @@
     height: 100%;
     width: 100%;
   }
-
   /* Spin animation */
   @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-
-  /* Inner wrapper spins, Leaflet moves the outer container */
-  .spin-inner {
-    animation: spin 20s linear infinite;
+  /* Style for the spinning hurricane icon */
+  .hurricane-marker {
+    background: none !important;
+    border: none !important;
+    width: 64px !important;
+    height: 64px !important;
+  }
+  .hurricane-marker img {
+    animation: spin 2s linear infinite;
     transform-origin: center center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 64px;
+    height: 64px;
+    display: block;
   }
 </style>
 </head>
@@ -40,27 +44,25 @@
   const ICON_SIZE = 64; // pixels
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
-
-  // Use divIcon with nested inner div for rotation
+  
+  // Use divIcon with simpler structure
   const hurricaneIcon = L.divIcon({
-    html: `<div class="spin-inner">
-             <img src="images/hurricane.svg" width="${ICON_SIZE}" height="${ICON_SIZE}">
-           </div>`,
+    html: `<img src="images/hurricane.svg" width="${ICON_SIZE}" height="${ICON_SIZE}">`,
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
     popupAnchor: [0, -ICON_SIZE / 2],
-    className: '' // no default Leaflet styles
+    className: 'hurricane-marker' // our custom class
   });
-
+  
   const map = L.map('map', {
     minZoom: MIN_ZOOM,
     maxZoom: MAX_ZOOM
   });
-
+  
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
-
+  
   fetch('surf-locations.json')
     .then(r => {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -77,10 +79,10 @@
             `<a href="${loc.link}" target="_blank">More info</a>`
           )
       );
-
+      
       const group = L.featureGroup(markers).addTo(map);
       const bounds = group.getBounds();
-
+      
       if (bounds.isValid()) {
         map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
       } else {
