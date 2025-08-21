@@ -23,16 +23,16 @@
     100% { transform: rotate(360deg); }
   }
   
-  /* Target the hurricane marker images specifically */
-  .leaflet-marker-icon.hurricane-marker {
-    animation: spin 2s linear infinite;
-    transform-origin: center center;
+  /* Target hurricane markers by src attribute - this will work! */
+  .leaflet-marker-icon[src*="hurricane.svg"] {
+    animation: spin 2s linear infinite !important;
+    transform-origin: center center !important;
   }
   
-  /* Alternative approach - target by src attribute */
-  img.leaflet-marker-icon[src*="hurricane"] {
-    animation: spin 2s linear infinite;
-    transform-origin: center center;
+  /* Backup selector for any hurricane images */
+  img[src*="hurricane.svg"] {
+    animation: spin 2s linear infinite !important;
+    transform-origin: center center !important;
   }
 </style>
 </head>
@@ -44,13 +44,12 @@
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
   
-  // Create hurricane icon with custom className for CSS targeting
+  // Use your original hurricane icon (remove the className since the CSS targets by src)
   const hurricaneIcon = L.icon({
-    iconUrl: 'https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/arrow-path.svg', // Using a placeholder spinning icon
+    iconUrl: 'images/hurricane.svg', // Your original path
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
-    popupAnchor: [0, -ICON_SIZE / 2],
-    className: 'hurricane-marker' // This is key - adds CSS class to the marker
+    popupAnchor: [0, -ICON_SIZE / 2]
   });
   
   const map = L.map('map', {
