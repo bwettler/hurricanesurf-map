@@ -10,6 +10,16 @@
     "link": "https://www.surfline.com/surf-news/swell-alert/tracking-major-hurricane-hilary/185309"
   },
   {
+    "location": "Between U.S. & Bermuda",
+    "lat": 32.3,
+    "lng": -64.5,
+    "hurricane": "Erin",
+    "year": "2025",
+    "surf": "20ft",
+    "notes": "Category 5",
+    "link": "https://nantucketcurrent.com/news/surfing-hurricane-erins-swell-on-nantucket"
+  },
+  {
     "location": "South County, RI",
     "lat": 43.450,
     "lng": -61.000,
@@ -170,5 +180,6 @@
     "link": "https://www.noaa.gov/news/hurricane-milton-2025"
   }
 ]
+
 
 
