@@ -16,36 +16,19 @@
     height: 100%;
     width: 100%;
   }
-  
-  /* Spin animation keyframes */
+
+  /* Spin animation */
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    to { transform: rotate(360deg); }
   }
-  
-  /* Hurricane icon styling - this WILL work with divIcon */
-  .hurricane-icon {
-    width: 64px !important;
-    height: 64px !important;
-    background: url('images/hurricane.svg') no-repeat center center;
-    background-size: contain;
-    animation: spin 2s linear infinite;
-    border: none !important;
-    background-color: transparent !important;
-  }
-  
-  /* Fallback with inline SVG if external file doesn't work */
-  .hurricane-icon-fallback {
-    width: 64px !important;
-    height: 64px !important;
-    border: none !important;
-    background-color: transparent !important;
-    animation: spin 2s linear infinite;
-  }
-  
-  .hurricane-svg {
-    width: 100%;
-    height: 100%;
+
+  /* Inner wrapper spins independently of Leaflet's positioning */
+  .spin-inner {
+    animation: spin 20s linear infinite; /* adjust speed here */
+    transform-origin: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
 </head>
@@ -53,120 +36,61 @@
 <div id="map"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-  const ICON_SIZE = 64; // pixels
+  const ICON_SIZE = 64; // change this to resize all markers
   const MAX_ZOOM = 8;
   const MIN_ZOOM = 3;
-  
-  // Create spinning hurricane icon using divIcon (this will definitely work!)
+
+  // Hurricane icon as a divIcon with nested spinning inner div
   const hurricaneIcon = L.divIcon({
-    className: 'hurricane-icon',
+    className: '', // no default Leaflet styles
+    html: `<div class="spin-inner">
+             <img src="images/hurricane.svg" width="${ICON_SIZE}" height="${ICON_SIZE}">
+           </div>`,
     iconSize: [ICON_SIZE, ICON_SIZE],
     iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
     popupAnchor: [0, -ICON_SIZE / 2]
   });
-  
-  // Fallback icon with inline SVG
-  const hurricaneIconFallback = L.divIcon({
-    className: 'hurricane-icon-fallback',
-    html: `<svg class="hurricane-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L19 8L17 7V9C17 9.55 16.45 10 15.9 10H13V12H10.9C10.45 12 10 12.45 10 13V15L8 17L9 19H7V21C7 21.55 7.45 22 8 22H16C16.55 22 17 21.55 17 21V19H15L16 17L14 15V13C14 12.45 14.45 12 15 12H17V10H19.1C19.65 10 20.1 9.55 20.1 9H21Z" fill="#FF6B35"/>
-      <circle cx="12" cy="12" r="3" fill="#FF6B35" opacity="0.7"/>
-      <path d="M12 8C10.34 8 9 9.34 9 11S10.34 14 12 14S15 12.66 15 11S13.66 8 12 8ZM12 12C11.45 12 11 11.55 11 11S11.45 10 12 10S13 10.45 13 11S12.55 12 12 12Z" fill="#FFFFFF"/>
-    </svg>`,
-    iconSize: [ICON_SIZE, ICON_SIZE],
-    iconAnchor: [ICON_SIZE / 2, ICON_SIZE / 2],
-    popupAnchor: [0, -ICON_SIZE / 2]
-  });
-  
+
   const map = L.map('map', {
     minZoom: MIN_ZOOM,
     maxZoom: MAX_ZOOM
   });
-  
+
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
-  
-  // Sample data for demonstration
-  const sampleData = [
-    { lat: 25.7617, lng: -80.1918, location: "Miami", hurricane: "Andrew", year: "1992", surf: "15-20ft", notes: "Category 5", link: "#" },
-    { lat: 26.1224, lng: -80.1373, location: "Fort Lauderdale", hurricane: "Wilma", year: "2005", surf: "12-18ft", notes: "Category 3", link: "#" },
-    { lat: 24.5551, lng: -81.7800, location: "Key West", hurricane: "Irma", year: "2017", surf: "10-15ft", notes: "Category 4", link: "#" },
-    { lat: 27.7663, lng: -82.6404, location: "Tampa", hurricane: "Charley", year: "2004", surf: "8-12ft", notes: "Category 4", link: "#" },
-    { lat: 30.4383, lng: -84.2807, location: "Tallahassee", hurricane: "Hermine", year: "2016", surf: "6-10ft", notes: "Category 1", link: "#" }
-  ];
-  
-  // Try to fetch the actual data, fall back to sample data
+
   fetch('surf-locations.json')
     .then(r => {
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return r.json();
     })
-    .then(data => createMarkers(data))
-    .catch(err => {
-      console.warn('Could not load surf-locations.json, using sample data:', err);
-      createMarkers(sampleData);
-    });
-  
-  function createMarkers(data) {
-    // Test if hurricane.svg loads, otherwise use fallback
-    const testImg = new Image();
-    let iconToUse = hurricaneIconFallback; // Default to fallback
-    
-    testImg.onload = function() {
-      console.log('Hurricane SVG loaded successfully');
-      iconToUse = hurricaneIcon;
-      addMarkersToMap(data, iconToUse);
-    };
-    
-    testImg.onerror = function() {
-      console.log('Hurricane SVG failed to load, using fallback icon');
-      addMarkersToMap(data, hurricaneIconFallback);
-    };
-    
-    testImg.src = 'images/hurricane.svg';
-    
-    // Timeout to ensure markers are added even if image test hangs
-    setTimeout(() => {
-      if (map.hasLayer === undefined || !document.querySelector('.hurricane-icon, .hurricane-icon-fallback')) {
-        console.log('Adding markers with fallback after timeout');
-        addMarkersToMap(data, hurricaneIconFallback);
+    .then(data => {
+      const markers = data.map(loc =>
+        L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
+          .bindPopup(
+            `<strong>${loc.location}</strong><br>` +
+            `${loc.hurricane} (${loc.year})<br>` +
+            `${loc.surf || ''}<br>` +
+            `${loc.notes || ''}<br>` +
+            `<a href="${loc.link}" target="_blank">More info</a>`
+          )
+      );
+
+      const group = L.featureGroup(markers).addTo(map);
+      const bounds = group.getBounds();
+
+      if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
+      } else {
+        map.setView([30, -80], 5);
       }
-    }, 2000);
-  }
-  
-  function addMarkersToMap(data, icon) {
-    const markers = data.map(loc =>
-      L.marker([loc.lat, loc.lng], { icon: icon })
-        .bindPopup(
-          `<strong>${loc.location}</strong><br>` +
-          `${loc.hurricane} (${loc.year})<br>` +
-          `${loc.surf || 'N/A'}<br>` +
-          `${loc.notes || ''}<br>` +
-          `<a href="${loc.link}" target="_blank">More info</a>`
-        )
-    );
-    
-    const group = L.featureGroup(markers).addTo(map);
-    const bounds = group.getBounds();
-    
-    if (bounds.isValid()) {
-      map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
-    } else {
+    })
+    .catch(err => {
+      console.error('Initialization error:', err);
+      alert('Error initializing map assets.');
       map.setView([30, -80], 5);
-    }
-    
-    // Verify spinning is working
-    setTimeout(() => {
-      const spinningElements = document.querySelectorAll('.hurricane-icon, .hurricane-icon-fallback');
-      console.log(`Found ${spinningElements.length} spinning hurricane icons`);
-      
-      spinningElements.forEach((el, i) => {
-        const computedStyle = window.getComputedStyle(el);
-        console.log(`Hurricane ${i+1} animation:`, computedStyle.animationName, computedStyle.animationDuration);
-      });
-    }, 1000);
-  }
+    });
 </script>
 </body>
 </html>
