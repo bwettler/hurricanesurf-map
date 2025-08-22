@@ -12,7 +12,7 @@
   {
     "location": "Between U.S. & Bermuda",
     "lat": 32.3,
-    "lng": -64.5,
+    "lng": -68.5,
     "hurricane": "Erin",
     "year": "2025",
     "surf": "20ft",
@@ -180,6 +180,7 @@
     "link": "https://www.noaa.gov/news/hurricane-milton-2025"
   }
 ]
+
 
 
 
