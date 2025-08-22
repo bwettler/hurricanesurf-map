@@ -2,29 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Hurricane Map</title>
+<title>Hurricane Surf – Event Map</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-  }
-  #map {
-    height: 100%;
-    width: 100%;
-  }
+  html, body { margin: 0; padding: 0; height: 100%; width: 100%; }
+  #map { height: 100%; width: 100%; }
 
   /* Spin animation */
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  /* Inner wrapper spins independently of Leaflet's positioning */
+  @keyframes spin { to { transform: rotate(360deg); } }
   .spin-inner {
-    animation: spin 20s linear infinite; /* adjust speed here */
+    animation: spin 20s linear infinite;
     transform-origin: center center;
     display: flex;
     align-items: center;
@@ -36,13 +24,9 @@
 <div id="map"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-  const ICON_SIZE = 64; // change this to resize all markers
-  const MAX_ZOOM = 8;
-  const MIN_ZOOM = 3;
-
-  // Hurricane icon as a divIcon with nested spinning inner div
+  const ICON_SIZE = 64;
   const hurricaneIcon = L.divIcon({
-    className: '', // no default Leaflet styles
+    className: '',
     html: `<div class="spin-inner">
              <img src="images/hurricane.svg" width="${ICON_SIZE}" height="${ICON_SIZE}">
            </div>`,
@@ -51,20 +35,13 @@
     popupAnchor: [0, -ICON_SIZE / 2]
   });
 
-  const map = L.map('map', {
-    minZoom: MIN_ZOOM,
-    maxZoom: MAX_ZOOM
-  });
-
+  const map = L.map('map', { minZoom: 3, maxZoom: 8 });
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
   fetch('surf-locations.json')
-    .then(r => {
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      return r.json();
-    })
+    .then(r => r.json())
     .then(data => {
       const markers = data.map(loc =>
         L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
@@ -76,19 +53,16 @@
             `<a href="${loc.link}" target="_blank">More info</a>`
           )
       );
-
       const group = L.featureGroup(markers).addTo(map);
-      const bounds = group.getBounds();
-
-      if (bounds.isValid()) {
-        map.fitBounds(bounds, { padding: [20, 20], maxZoom: MAX_ZOOM });
+      if (group.getBounds().isValid()) {
+        map.fitBounds(group.getBounds(), { padding: [20, 20], maxZoom: 8 });
       } else {
         map.setView([30, -80], 5);
       }
     })
     .catch(err => {
-      console.error('Initialization error:', err);
-      alert('Error initializing map assets.');
+      console.error(err);
+      alert('Error loading map data.');
       map.setView([30, -80], 5);
     });
 </script>
