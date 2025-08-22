@@ -1,12 +1,12 @@
 [
-  {
-    "location": "Ventura Beach, CA",
-    "lat": 34.275,
-    "lng": -120.000,
+ {
+    "location": "San Fernando, Baja California",
+    "lat": 29.7,
+    "lng": -115.6,
     "hurricane": "Hilary",
-    "year": 2023,
-    "surf": "10–15 ft",
-    "notes": "Flooding and injuries from rogue waves",
+    "year": "2023",
+    "surf": "12–18ft",
+    "notes": "Category 2",
     "link": "https://www.surfline.com/surf-news/swell-alert/tracking-major-hurricane-hilary/185309"
   },
   {
@@ -110,13 +110,13 @@
     "link": "https://www.capecodtimes.com/story/news/2021/08/22/hurricane-henri-brings-heavy-rain-strong-winds-coastal-flooding-cape-cod/8238828002/"
   },
   {
-    "location": "Santa Cruz, CA",
-    "lat": 36.951,
-    "lng": -123.000,
+    "location": "San Rafael, Baja California Sur",
+    "lat": 27.2,
+    "lng": -114.3,
     "hurricane": "Kay",
-    "year": 2022,
-    "surf": "5–8 ft",
-    "notes": "Unusual Pacific swell; minor flooding",
+    "year": "2022",
+    "surf": "10–15ft",
+    "notes": "Category 1",
     "link": "https://www.surfline.com/surf-news/hurricane-kay-brings-rare-south-swell-to-california/157839"
   },
   {
@@ -170,3 +170,4 @@
     "link": "https://www.noaa.gov/news/hurricane-milton-2025"
   }
 ]
+
