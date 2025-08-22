@@ -9,7 +9,6 @@
   html, body { margin: 0; padding: 0; height: 100%; width: 100%; }
   #map { height: 100%; width: 100%; }
 
-  /* Spin animation */
   @keyframes spin { to { transform: rotate(360deg); } }
   .spin-inner {
     animation: spin 20s linear infinite;
@@ -40,28 +39,44 @@
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  fetch('surf-locations.json')
-    .then(r => r.json())
-    .then(data => {
-      const markers = data.map(loc =>
-        L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
-          .bindPopup(
-            `<strong>${loc.location}</strong><br>` +
-            `${loc.hurricane} (${loc.year})<br>` +
-            `${loc.surf || ''}<br>` +
-            `${loc.notes || ''}<br>` +
-            `<a href="${loc.link}" target="_blank">More info</a>`
-          )
-      );
-      const group = L.featureGroup(markers).addTo(map);
-      if (group.getBounds().isValid()) {
-        map.fitBounds(group.getBounds(), { padding: [20, 20], maxZoom: 8 });
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      alert('Error loading map data.');
-    });
+  const data = [
+    {
+      lat: 27.2,
+      lng: -114.3,
+      location: "San Rafael, Baja California Sur",
+      hurricane: "Kay",
+      year: "2022",
+      surf: "10–15ft",
+      notes: "Category 1",
+      link: "#"
+    },
+    {
+      lat: 29.7,
+      lng: -115.6,
+      location: "San Fernando, Baja California",
+      hurricane: "Hilary",
+      year: "2023",
+      surf: "12–18ft",
+      notes: "Category 2",
+      link: "#"
+    }
+  ];
+
+  const markers = data.map(loc =>
+    L.marker([loc.lat, loc.lng], { icon: hurricaneIcon })
+      .bindPopup(
+        `<strong>${loc.location}</strong><br>` +
+        `${loc.hurricane} (${loc.year})<br>` +
+        `${loc.surf}<br>` +
+        `${loc.notes}<br>` +
+        `<a href="${loc.link}" target="_blank">More info</a>`
+      )
+  );
+
+  const group = L.featureGroup(markers).addTo(map);
+  if (group.getBounds().isValid()) {
+    map.fitBounds(group.getBounds(), { padding: [20, 20], maxZoom: 8 });
+  }
 </script>
 </body>
 </html>
