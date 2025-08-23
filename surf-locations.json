@@ -2,7 +2,7 @@
   {
     "location": "San Fernando, Baja California, Mexico",
     "lat": 29.775,
-    "lng": -115.600,
+    "lng": -115.800,
     "hurricane": "Hilary",
     "year": 2023,
     "surf": "10–15 ft",
@@ -104,7 +104,7 @@
     "lat": 32.3,
     "lng": -64.5,
     "hurricane": "Erin",
-    "year": "2025",
+    "year": 2025,
     "surf": "20ft",
     "notes": "Category 5",
     "link": "https://nantucketcurrent.com/news/surfing-hurricane-erins-swell-on-nantucket"
@@ -112,7 +112,7 @@
   {
     "location": "San Rafael, Baja California Sur, Mexico",
     "lat": 27.251,
-    "lng": -114.300,
+    "lng": -114.500,
     "hurricane": "Kay",
     "year": 2022,
     "surf": "5–8 ft",
@@ -170,3 +170,4 @@
     "link": "https://www.noaa.gov/news/hurricane-milton-2025"
   }
 ]
+
