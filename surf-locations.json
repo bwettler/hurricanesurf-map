@@ -1,8 +1,8 @@
 [
   {
     "location": "San Fernando, Baja California, Mexico",
-    "lat": 34.275,
-    "lng": -120.000,
+    "lat": 29.775,
+    "lng": -115.600,
     "hurricane": "Hilary",
     "year": 2023,
     "surf": "10–15 ft",
@@ -99,10 +99,20 @@
     "notes": "Cat. 1 storm; Strong surf and coastal flooding",
     "link": "https://www.capecodtimes.com/story/news/2021/08/22/hurricane-henri-brings-heavy-rain-strong-winds-coastal-flooding-cape-cod/8238828002/"
   },
+ {
+    "location": "Between U.S. & Bermuda",
+    "lat": 32.3,
+    "lng": -64.5,
+    "hurricane": "Erin",
+    "year": "2025",
+    "surf": "20ft",
+    "notes": "Category 5",
+    "link": "https://nantucketcurrent.com/news/surfing-hurricane-erins-swell-on-nantucket"
+  },
   {
     "location": "San Rafael, Baja California Sur, Mexico",
-    "lat": 36.951,
-    "lng": -123.000,
+    "lat": 27.251,
+    "lng": -114.300,
     "hurricane": "Kay",
     "year": 2022,
     "surf": "5–8 ft",
