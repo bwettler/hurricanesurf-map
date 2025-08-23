@@ -11,8 +11,8 @@
   },
   {
     "location": "eventually weakened in the northwestern Atlantic",
-    "lat": 41.450,
-    "lng": -70.000,
+    "lat": 43.000,
+    "lng": -61.000,
     "hurricane": "Fiona",
     "year": 2022,
     "surf": "10 ft",
@@ -170,5 +170,6 @@
     "link": "https://www.noaa.gov/news/hurricane-milton-2025"
   }
 ]
+
 
 
