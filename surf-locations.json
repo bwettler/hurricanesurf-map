@@ -1,32 +1,22 @@
 [
- {
-    "location": "San Fernando, Baja California",
-    "lat": 29.7,
-    "lng": -115.6,
+  {
+    "location": "San Fernando, Baja California, Mexico",
+    "lat": 34.275,
+    "lng": -120.000,
     "hurricane": "Hilary",
-    "year": "2023",
-    "surf": "12–18ft",
-    "notes": "Category 2",
+    "year": 2023,
+    "surf": "10–15 ft",
+    "notes": "Cat. 1 storm; Flooding and injuries from rogue waves",
     "link": "https://www.surfline.com/surf-news/swell-alert/tracking-major-hurricane-hilary/185309"
   },
   {
-    "location": "Between U.S. & Bermuda",
-    "lat": 32.3,
-    "lng": -68.5,
-    "hurricane": "Erin",
-    "year": "2025",
-    "surf": "20ft",
-    "notes": "Category 5",
-    "link": "https://nantucketcurrent.com/news/surfing-hurricane-erins-swell-on-nantucket"
-  },
-  {
-    "location": "South County, RI",
-    "lat": 43.450,
-    "lng": -61.000,
+    "location": "eventually weakened in the northwestern Atlantic",
+    "lat": 41.450,
+    "lng": -70.000,
     "hurricane": "Fiona",
     "year": 2022,
     "surf": "10 ft",
-    "notes": "Waves damaged infrastructure and closed beaches",
+    "notes": "Cat. 1 storm; Waves damaged infrastructure and closed beaches",
     "link": "https://www.abc6.com/effects-of-hurricane-fiona-sends-10-foot-waves-to-south-county/"
   },
   {
@@ -36,7 +26,7 @@
     "hurricane": "Michael",
     "year": 2018,
     "surf": "20+ ft surge",
-    "notes": "Category 5 storm; extreme coastal flooding",
+    "notes": "Cat 5 storm; extreme coastal flooding",
     "link": "https://www.naplesnews.com/story/news/local/environment/2018/10/10/hurricane-michael-brings-high-waves-possible-beach-erosion-collier-florida/1589434002/"
   },
   {
@@ -46,7 +36,7 @@
     "hurricane": "Lee",
     "year": 2025,
     "surf": "6–10 ft",
-    "notes": "Rip currents and beach closures",
+    "notes": "Cat. 5 storm; Rip currents and beach closures",
     "link": "https://www.youtube.com/watch?v=nasrzUgqZQg"
   },
   {
@@ -56,18 +46,8 @@
     "hurricane": "Larry",
     "year": 2025,
     "surf": "8–12 ft",
-    "notes": "Surfing conditions and coastal erosion",
+    "notes": "Cat. 1 storm; Surfing conditions and coastal erosion",
     "link": "https://www.urnsurfco.com/hurricane-larry-new-jersey/"
-  },
-  {
-    "location": "Myrtle Beach, SC",
-    "lat": 33.689,
-    "lng": -78.500,
-    "hurricane": "Ian",
-    "year": 2022,
-    "surf": "6–10 ft",
-    "notes": "Waves breached sea walls and flooded streets",
-    "link": "https://www.live5news.com/2022/10/02/video-shows-hurricane-ian-slamming-myrtle-beach-state-park-pier-during-height-storm/"
   },
   {
     "location": "Seacoast, NH",
@@ -76,7 +56,7 @@
     "hurricane": "Teddy",
     "year": 2020,
     "surf": "8–10 ft",
-    "notes": "Surfers reported excellent conditions amid warnings",
+    "notes": "Cat. 4 Storm; Surfers reported excellent conditions amid warnings",
     "link": "https://www.seacoastonline.com/story/news/2020/09/23/surfers-delight-hurricane-teddy-brings-big-waves-to-seacoast/42683481/"
   },
   {
@@ -86,7 +66,7 @@
     "hurricane": "Helene",
     "year": 2024,
     "surf": "~6 ft",
-    "notes": "Storm waves crashed on shore; beach erosion reported",
+    "notes": "Cat. 4 storm; Waves crashed on shore; beach erosion reported",
     "link": "https://www.rnz.co.nz/news/world/529252/in-pictures-hurricane-helene-batters-florida"
   },
   {
@@ -96,7 +76,7 @@
     "hurricane": "Harvey",
     "year": 2017,
     "surf": "12–18 ft",
-    "notes": "Massive flooding and storm surge",
+    "notes": "Cat. 4 storm; Massive flooding and storm surge",
     "link": "https://www.nbcnews.com/slideshow/news/photos-hurricane-harvey-slams-texas-n796226"
   },
   {
@@ -106,7 +86,7 @@
     "hurricane": "Dorian",
     "year": 2019,
     "surf": "10–14 ft",
-    "notes": "Beach erosion and evacuations",
+    "notes": "Cat. 5; Beach erosion and evacuations",
     "link": "https://www.wral.com/hurricane-dorian-brings-heavy-rain-strong-winds-to-nc-coast/18616569/"
   },
   {
@@ -116,17 +96,17 @@
     "hurricane": "Henri",
     "year": 2021,
     "surf": "7–11 ft",
-    "notes": "Strong surf and coastal flooding",
+    "notes": "Cat. 1 storm; Strong surf and coastal flooding",
     "link": "https://www.capecodtimes.com/story/news/2021/08/22/hurricane-henri-brings-heavy-rain-strong-winds-coastal-flooding-cape-cod/8238828002/"
   },
   {
-    "location": "San Rafael, Baja California Sur",
-    "lat": 27.2,
-    "lng": -114.3,
+    "location": "San Rafael, Baja California Sur, Mexico",
+    "lat": 36.951,
+    "lng": -123.000,
     "hurricane": "Kay",
-    "year": "2022",
-    "surf": "10–15ft",
-    "notes": "Category 1",
+    "year": 2022,
+    "surf": "5–8 ft",
+    "notes": "Cat. 1 storm; Unusual Pacific swell; minor flooding",
     "link": "https://www.surfline.com/surf-news/hurricane-kay-brings-rare-south-swell-to-california/157839"
   },
   {
@@ -136,7 +116,7 @@
     "hurricane": "Idalia",
     "year": 2023,
     "surf": "9–13 ft",
-    "notes": "Storm surge flooded low-lying areas",
+    "notes": "Cat. 3. Storm surge flooded low-lying areas",
     "link": "https://www.savannahnow.com/story/news/2023/08/30/hurricane-idalia-tybee-island-georgia-storm-surge-flooding/70752694007/"
   },
   {
@@ -156,7 +136,7 @@
     "hurricane": "Irma",
     "year": 2017,
     "surf": "12–16 ft",
-    "notes": "Historic storm surge and flooding",
+    "notes": "Cat. 5 Historic storm surge and flooding",
     "link": "https://www.naplesnews.com/story/news/local/2017/09/10/hurricane-irma-hits-naples-florida/651156001/"
   },
   {
@@ -166,7 +146,7 @@
     "hurricane": "Ian",
     "year": 2022,
     "surf": "15–20 ft",
-    "notes": "Devastating surge; bridge destroyed",
+    "notes": "Cat. 5 storm; Devastating surge; bridge destroyed",
     "link": "https://www.nytimes.com/2022/09/29/us/hurricane-ian-sanibel-island.html"
   },
   {
@@ -176,11 +156,7 @@
     "hurricane": "Milton",
     "year": 2025,
     "surf": "8–12 ft",
-    "notes": "Strong swell and beach erosion",
+    "notes": "Cat. 4 storm; Strong swell and beach erosion",
     "link": "https://www.noaa.gov/news/hurricane-milton-2025"
   }
 ]
-
-
-
-
